@@ -7,16 +7,23 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
+import PersonIcon from "@mui/icons-material/Person";
+import { grey } from "@mui/material/colors";
 import Image from "next/image";
-import { alignProperty } from "@mui/material/styles/cssUtils";
+import Link from "next/link";
 
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const pages = [
+  ["Moje zestawy", "mysets"],
+  ["Kategorie", "categories"],
+  ["Utwórz nowy zestaw", "newset"],
+];
+const settings = [
+  ["Profil", "myprofile"],
+  ["Wyloguj", ""],
+];
 
 function TopBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -45,14 +52,6 @@ function TopBar() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* <Box sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}>
-            <Image
-              src="/images/smalllogo.png"
-              alt="logo"
-              width="35"
-              height="35"
-            ></Image>
-          </Box> */}
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -83,8 +82,10 @@ function TopBar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem key={page[1]} onClick={handleCloseNavMenu}>
+                  <Link href={"/" + page[1]}>
+                    <Typography textAlign="center">{page[0]}</Typography>
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
@@ -95,29 +96,32 @@ function TopBar() {
               flexGrow: 1,
             }}
           >
-            <Image
-              src="/images/smalllogo.png"
-              alt="logo"
-              width="35"
-              height="35"
-            ></Image>
+            <Link href="/">
+              <Image
+                src="/images/smalllogo.png"
+                alt="logo"
+                width="35"
+                height="35"
+              ></Image>
+            </Link>
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
+              <Link href={"/" + page[1]} key={page[1]}>
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  {page[0]}
+                </Button>
+              </Link>
             ))}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title="Ustawienia">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <PersonIcon sx={{ color: grey[50] }} />
               </IconButton>
             </Tooltip>
             <Menu
@@ -137,9 +141,11 @@ function TopBar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
+                <Link href={"/" + setting[1]} key={setting[1]}>
+                  <MenuItem onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">{setting[0]}</Typography>
+                  </MenuItem>
+                </Link>
               ))}
             </Menu>
           </Box>
