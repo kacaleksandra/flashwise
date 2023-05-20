@@ -4,7 +4,7 @@ Welcome to the README file for the Flashwise application built with Next.js!
 
 Flashwise is a dynamic web application designed to help users learn new things efficiently and effectively. In this repository, you will find only the front-end part of the application, which was built using the Next.js framework. The back-end of the application was developed by @TBury and is not included in this repository.
 
-> This project was created as part of the "Graphic and Object-Oriented Design" course in the 4th semester of computer science studies.
+> This project was created as part of the "Graphic and Object-Oriented programming" course in the 4th semester of computer science studies.
 
 ## How to open this project?
 
