@@ -1,4 +1,5 @@
 import TopBar from "../../topBar";
+import BottomBar from "@/components/bottomBar/BottomBar";
 
 interface IDefaultLayoutProps {
   children: React.ReactNode;
@@ -9,6 +10,7 @@ export function DefaultLayout({ children }: IDefaultLayoutProps) {
     <>
       <TopBar />
       <div className="flex-grow">{children}</div>
+      <BottomBar />
     </>
   );
 }
