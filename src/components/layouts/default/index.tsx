@@ -8,9 +8,13 @@ interface IDefaultLayoutProps {
 export function DefaultLayout({ children }: IDefaultLayoutProps) {
   return (
     <>
-      <TopBar />
-      <div className="flex-grow">{children}</div>
-      <BottomBar />
+      <div className="flex flex-col min-h-screen">
+        <TopBar />
+        <div className="flex-grow">{children}</div>
+        <div className="mt-auto ">
+          <BottomBar />
+        </div>
+      </div>
     </>
   );
 }

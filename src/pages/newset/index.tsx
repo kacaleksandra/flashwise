@@ -1,3 +1,11 @@
+import Breadcrumb from "../../components/breadcrumb";
+
 export default function NewSet() {
-  return <h1>newset</h1>;
+  return (
+    <>
+      <div>
+        <Breadcrumb name="Nowy set" />
+      </div>
+    </>
+  );
 }

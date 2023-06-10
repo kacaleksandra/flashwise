@@ -14,6 +14,7 @@ import {
 } from "@mui/material/styles";
 import Card from "../components/card/Card";
 import Button from "@mui/material/Button";
+import Link from "next/link";
 
 let theme = createTheme();
 theme = responsiveFontSizes(theme);
@@ -164,7 +165,13 @@ export default function Home() {
             >
               Dołącz do świata nowoczesnych fiszek!
             </Typography>
-            <Button variant="contained" className="bg-blue-500">
+
+            <Button
+              component={Link}
+              href={"/registerpage"}
+              variant="contained"
+              className="bg-blue-500"
+            >
               Dołączam!
             </Button>
           </Grid>

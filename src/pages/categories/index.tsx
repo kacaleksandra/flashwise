@@ -1,3 +1,11 @@
+import Breadcrumb from "../../components/breadcrumb";
+
 export default function Categories() {
-  return <h1>categories</h1>;
+  return (
+    <>
+      <div>
+        <Breadcrumb name="Kategorie" />
+      </div>
+    </>
+  );
 }

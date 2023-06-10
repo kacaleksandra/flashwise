@@ -20,12 +20,10 @@ const pages = [
   ["Kategorie", "categories"],
   ["Utwórz nowy zestaw", "newset"],
 ];
-const settings = [
-  ["Profil", "myprofile"],
-  ["Wyloguj", ""],
-];
 
 function TopBar() {
+  const [authenticated, setAuthenticated] = React.useState<boolean>(false);
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -140,13 +138,16 @@ function TopBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <Link href={"/" + setting[1]} key={setting[1]}>
-                  <MenuItem onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting[0]}</Typography>
-                  </MenuItem>
-                </Link>
-              ))}
+              <Link
+                href={authenticated ? "/" : "/loginpage"}
+                key={authenticated ? "mainPage" : "loginPage"}
+              >
+                <MenuItem onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">
+                    {authenticated ? "Wyloguj się" : "Zaloguj się"}
+                  </Typography>
+                </MenuItem>
+              </Link>
             </Menu>
           </Box>
         </Toolbar>
