@@ -5,6 +5,7 @@ import TextField from "@mui/material/TextField";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Box } from "@mui/material";
+import { Tooltip } from "@mui/material";
 
 interface Card {
   term: string;
@@ -14,10 +15,30 @@ interface Card {
 export default function NewSet() {
   const [cards, setCards] = useState<Card[]>([{ term: "", definition: "" }]);
 
+  // Stan dla pola nazwa zestawu
+  const [setName, setSetName] = useState<string>("");
+
+  // Aktualizacja stanu po zmianie nazwy
+  const handleSetNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSetName(event.target.value);
+  };
+
+  // Czy formularz jest poprawnie wypełniony?
+  const isFormValid = () =>
+    validateFormFieldsAreNotEmpty(cards) && setName.length > 0;
+
+  // Czy karty są wypełnione?
+  const validateFormFieldsAreNotEmpty = (cards: Card[]) =>
+    cards.every(
+      (card) => card.term.trim() !== "" && card.definition.trim() !== ""
+    );
+
+  // Dodanie nowej karty
   const handleAddCard = () => {
     setCards([...cards, { term: "", definition: "" }]);
   };
 
+  // Aktualizacja stanu po zmianie pola
   const handleTermChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     index: number
@@ -27,15 +48,17 @@ export default function NewSet() {
     setCards(newCards);
   };
 
+  // Aktualizacja stanu po zmianie pola
   const handleDefinitionChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     index: number
   ) => {
-    let updatedList = [...cards];
-    updatedList[index].definition = event.target.value;
-    setCards(updatedList);
+    const newCards = [...cards];
+    newCards[index].definition = event.target.value;
+    setCards(newCards);
   };
 
+  // Usunięcie karty
   const handleDeleteCardClick = (index: number) => {
     let updatedList = [...cards];
     if (updatedList.length === 1) return;
@@ -53,22 +76,49 @@ export default function NewSet() {
           Stwórz nowy zestaw
         </Typography>
 
-        {/* Nazwa zestawu */}
+        {/* Dodanie pola Nazwa Zestawu */}
         <div className="flex justify-between">
           <TextField
+            required={true}
+            value={setName}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              handleSetNameChange(event);
+            }}
             className="w-1/2 mx-5 my-3"
             id="set-name"
             label="Nazwa zestawu"
             variant="standard"
           />
+
           {/*Przycisk Stwórz zestaw*/}
-          <Button
-            variant="contained"
-            className="bg-blue-500 my-5 mr-10"
-            size="large"
-          >
-            Stwórz zestaw
-          </Button>
+          <div className="flex justify-center grow">
+            {!isFormValid() || cards.length < 2 ? (
+              <Tooltip
+                title="Nazwij zestaw i stwórz minimum dwie fiszki!"
+                followCursor
+              >
+                <span className="my-5 mr-10">
+                  <Button
+                    disabled={!isFormValid() || cards.length < 2}
+                    variant="contained"
+                    size="large"
+                    className={"bg-blue-500 "}
+                  >
+                    Stwórz zestaw
+                  </Button>
+                </span>
+              </Tooltip>
+            ) : (
+              <Button
+                disabled={!isFormValid() || cards.length < 2}
+                variant="contained"
+                size="large"
+                className={"bg-blue-500 my-5 mr-10"}
+              >
+                Stwórz zestaw
+              </Button>
+            )}
+          </div>
         </div>
         <Box
           sx={{
@@ -76,12 +126,12 @@ export default function NewSet() {
             display: "flex",
             flexDirection: "column",
             height: "70vh",
-            overflow: "hidden",
-            overflowY: "scroll",
+            overflowX: "hidden",
           }}
         >
           {/* Karty fiszek */}
-          {cards.map((card: Card, index: number) => (
+
+          {cards.map((card, index) => (
             <div
               key={index}
               className="flex justify-between items-center my-3 mx-5"
@@ -98,7 +148,7 @@ export default function NewSet() {
               />
 
               <TextField
-                className="flex-1 ml=2"
+                className="flex-1 ml-2"
                 id={`definition-${index}`}
                 label="Definicja"
                 variant="standard"
@@ -108,9 +158,11 @@ export default function NewSet() {
                 }}
               />
 
-              {/* Przycisk usuwanie karty */}
-
-              <IconButton onClick={() => handleDeleteCardClick(index)}>
+              {/*Przycisk usuwanie karty*/}
+              <IconButton
+                onClick={() => handleDeleteCardClick(index)}
+                disabled={cards.length < 2}
+              >
                 <DeleteIcon />
               </IconButton>
             </div>

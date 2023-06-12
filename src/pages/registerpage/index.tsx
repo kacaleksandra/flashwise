@@ -48,7 +48,7 @@ export default function Register() {
                       <ErrorMessage
                         component="span"
                         name="email"
-                        className="text-sm"
+                        className="text-sm text-red-600"
                       />
                     </div>
                     <div>
@@ -65,7 +65,7 @@ export default function Register() {
                       <ErrorMessage
                         component="span"
                         name="password"
-                        className="text-sm"
+                        className="text-sm text-red-600"
                       />
                     </div>
                     <div>
@@ -83,9 +83,11 @@ export default function Register() {
                         placeholder=""
                         className={classes.inputs}
                       />
-                      {errors.confirmPassword && (
-                        <p className="text-sm">{errors.confirmPassword}</p>
-                      )}
+                      <ErrorMessage
+                        component="span"
+                        name="confirmPassword"
+                        className="text-sm text-red-600"
+                      />
                     </div>
                     <button
                       type="submit"

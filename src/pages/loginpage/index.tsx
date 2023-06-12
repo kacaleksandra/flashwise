@@ -42,7 +42,7 @@ export default function MyProfile() {
                       <ErrorMessage
                         component="span"
                         name="email"
-                        className="text-sm"
+                        className="text-sm text-red-600"
                       />
                     </div>
                     <div>
@@ -59,7 +59,7 @@ export default function MyProfile() {
                       <ErrorMessage
                         component="span"
                         name="password"
-                        className="text-sm"
+                        className="text-sm text-red-600"
                       />
                     </div>
                     <button
