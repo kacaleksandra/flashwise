@@ -7,24 +7,3 @@
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
 }
-
-.inputs {
-  --tw-bg-opacity: 1;
-  background-color: rgb(249 250 251 / var(--tw-bg-opacity));
-  border-width: 1px;
-  --tw-border-opacity: 1;
-  border-color: rgb(209 213 219 / var(--tw-border-opacity));
-  --tw-text-opacity: 1;
-  color: rgb(17 24 39 / var(--tw-text-opacity));
-  border-radius: 0.5rem /* 8px */;
-  display: block;
-  width: 100%;
-  padding: 0.625rem /* 10px */;
-}
-
-@media (min-width: 640px) {
-  .inputs {
-    font-size: 0.875rem /* 14px */;
-    line-height: 1.25rem /* 20px */;
-  }
-}
