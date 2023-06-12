@@ -1,4 +1,12 @@
 import Link from "next/link";
+import classes from "src/styles/forms.module.css";
+import { Formik, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+
+const validationSchema = Yup.object().shape({
+  email: Yup.string().required("To pole jest wymagane"),
+  password: Yup.string().required("To pole jest wymagane"),
+});
 
 export default function MyProfile() {
   return (
@@ -10,53 +18,77 @@ export default function MyProfile() {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-blue-500 md:text-2xl">
                 Zaloguj się
               </h1>
-              <form className="space-y-4 md:space-y-6" action="#">
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block mb-2 text-sm font-medium text-gray-900"
-                  >
-                    e-mail
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                    placeholder="name@company.com"
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="password"
-                    className="block mb-2 text-sm font-medium text-gray-900 "
-                  >
-                    Hasło
-                  </label>
-                  <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    placeholder="••••••••"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="w-full text-white bg-blue-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
-                >
-                  Sign in
-                </button>
-                <p className="text-sm font-light text-gray-500">
-                  Nie masz jeszcze konta?{" "}
-                  <Link
-                    href={"/registerpage"}
-                    className="font-medium text-blue-500 hover:underline "
-                  >
-                    Załóż konto
-                  </Link>
-                </p>
-              </form>
+
+              <Formik
+                initialValues={{ email: "", password: "" }}
+                validationSchema={validationSchema}
+                onSubmit={(values) => {
+                  console.log(values);
+                }}
+              >
+                {({ errors, touched }) => (
+                  <form className="space-y-4 md:space-y-6" action="#">
+                    <div>
+                      <label htmlFor="email" className={classes.labels}>
+                        e-mail
+                      </label>
+                      <Field
+                        type="email"
+                        name="email"
+                        id="email"
+                        className={classes.inputs}
+                        placeholder="name@company.com"
+                      />
+                      <ErrorMessage
+                        component="span"
+                        name="email"
+                        className="text-sm"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="password" className={classes.labels}>
+                        Hasło
+                      </label>
+                      <Field
+                        type="password"
+                        name="password"
+                        id="password"
+                        placeholder="••••••••"
+                        className={classes.inputs}
+                      />
+                      <ErrorMessage
+                        component="span"
+                        name="password"
+                        className="text-sm"
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      disabled={
+                        Object.keys(errors).length > 0 ||
+                        Object.keys(touched).length === 0
+                      }
+                      className={`w-full bg-blue-500 text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ${
+                        Object.keys(errors).length > 0 ||
+                        Object.keys(touched).length === 0
+                          ? "opacity-50 cursor-not-allowed"
+                          : ""
+                      }`}
+                    >
+                      Zaloguj się
+                    </button>
+                    <p className="text-sm font-light text-gray-500">
+                      Nie masz jeszcze konta?{" "}
+                      <Link
+                        href={"/registerpage"}
+                        className="font-medium text-blue-500 hover:underline "
+                      >
+                        Załóż konto
+                      </Link>
+                    </p>
+                  </form>
+                )}
+              </Formik>
             </div>
           </div>
         </div>
