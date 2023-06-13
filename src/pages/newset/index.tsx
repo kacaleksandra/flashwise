@@ -6,6 +6,9 @@ import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Box } from "@mui/material";
 import { Tooltip } from "@mui/material";
+import { Switch } from "@mui/material";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 interface Card {
   term: string;
@@ -17,6 +20,9 @@ export default function NewSet() {
 
   // Stan dla pola nazwa zestawu
   const [setName, setSetName] = useState<string>("");
+
+  // Stan publiczny/prywatny
+  const [isPublic, setIsPublic] = useState(false);
 
   // Aktualizacja stanu po zmianie nazwy
   const handleSetNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,6 +72,11 @@ export default function NewSet() {
     setCards(updatedList);
   };
 
+  //zmiana publiczny/prywatny
+  const handlePublicChange = () => {
+    setIsPublic(!isPublic);
+  };
+
   return (
     <>
       <div>
@@ -91,7 +102,23 @@ export default function NewSet() {
           />
 
           {/*Przycisk Stwórz zestaw*/}
-          <div className="flex justify-center grow">
+          <div className="flex justify-around items-center grow ">
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={isPublic}
+                    onChange={() => handlePublicChange()}
+                  />
+                }
+                label={
+                  <Typography className="text-xs text-gray-800">
+                    prywatny/publiczny
+                  </Typography>
+                }
+                labelPlacement="bottom"
+              />
+            </FormGroup>
             {!isFormValid() || cards.length < 2 ? (
               <Tooltip
                 title="Nazwij zestaw i stwórz minimum dwie fiszki!"
