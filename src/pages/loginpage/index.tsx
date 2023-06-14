@@ -1,8 +1,8 @@
 import Link from "next/link";
-import classes from "src/styles/forms.module.css";
-import { Formik, Field, ErrorMessage } from "formik";
+import { Formik, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import CoreInput from "@/components/Core/Input";
+import CoreLabel from "@/components/Core/Label";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required("To pole jest wymagane"),
@@ -30,9 +30,7 @@ export default function MyProfile() {
                 {({ errors, touched }) => (
                   <form className="space-y-4 md:space-y-6" action="#">
                     <div>
-                      <label htmlFor="email" className={classes.labels}>
-                        e-mail
-                      </label>
+                      <CoreLabel htmlFor="email">e-mail</CoreLabel>
                       <CoreInput
                         type="email"
                         name="email"
@@ -46,15 +44,12 @@ export default function MyProfile() {
                       />
                     </div>
                     <div>
-                      <label htmlFor="password" className={classes.labels}>
-                        Hasło
-                      </label>
+                      <CoreLabel htmlFor="password">Hasło</CoreLabel>
                       <CoreInput
                         type="password"
                         name="password"
                         id="password"
                         placeholder="••••••••"
-                        className={classes.inputs}
                       />
                       <ErrorMessage
                         component="span"

@@ -1,9 +1,0 @@
-.labels {
-  display: block;
-  margin-bottom: 0.5rem /* 8px */;
-  font-size: 0.875rem /* 14px */;
-  line-height: 1.25rem /* 20px */;
-  font-weight: 500;
-  --tw-text-opacity: 1;
-  color: rgb(17 24 39 / var(--tw-text-opacity));
-}

@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { Formik, Field, ErrorMessage } from "formik";
+import { Formik, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import classes from "src/styles/forms.module.css";
 import CoreInput from "@/components/Core/Input";
+import CoreLabel from "@/components/Core/Label";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { useTokenStore } from "@/store/useTokenStore";
@@ -106,9 +106,7 @@ export default function Register() {
                     }}
                   >
                     <div>
-                      <label htmlFor="login" className={classes.labels}>
-                        Login
-                      </label>
+                      <CoreLabel htmlFor="login">Login</CoreLabel>
                       <CoreInput
                         type="login"
                         name="login"
@@ -122,14 +120,11 @@ export default function Register() {
                       />
                     </div>
                     <div>
-                      <label htmlFor="email" className={classes.labels}>
-                        E-mail
-                      </label>
+                      <CoreLabel htmlFor="email">E-mail</CoreLabel>
                       <CoreInput
                         type="email"
                         name="email"
                         id="email"
-                        className={classes.inputs}
                         placeholder="name@company.com"
                       />
                       <ErrorMessage
@@ -139,9 +134,7 @@ export default function Register() {
                       />
                     </div>
                     <div>
-                      <label htmlFor="password" className={classes.labels}>
-                        Hasło
-                      </label>
+                      <CoreLabel htmlFor="password">Hasło</CoreLabel>
                       <CoreInput
                         type="password"
                         name="password"
@@ -155,12 +148,9 @@ export default function Register() {
                       />
                     </div>
                     <div>
-                      <label
-                        htmlFor="confirmPassword"
-                        className={classes.labels}
-                      >
+                      <CoreLabel htmlFor="confirmPassword">
                         Powtórz hasło
-                      </label>
+                      </CoreLabel>
 
                       <CoreInput
                         type="password"
