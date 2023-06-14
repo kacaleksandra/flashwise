@@ -37,7 +37,6 @@ export default function MyProfile() {
                         type="email"
                         name="email"
                         id="email"
-                        className={classes.inputs}
                         placeholder="name@company.com"
                       />
                       <ErrorMessage

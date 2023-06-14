@@ -1,6 +1,7 @@
 import Breadcrumb from "../../components/breadcrumb";
 import Link from "next/link";
-import { NoSets } from "@/components/nosets";
+import { AnimationPage } from "@/components/animationPage";
+import nothing from "../../lotties/nothing.json";
 
 export default function MySets() {
   const sets: string[] = [];
@@ -10,7 +11,7 @@ export default function MySets() {
         <Breadcrumb name="Moje zestawy" />
       </div>
       {sets.length === 0 ? (
-        <NoSets />
+        <AnimationPage descr="Nic tu nie ma..." animation={nothing} />
       ) : (
         <div className="sm:grid sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           {sets.map((value, valueIndex) => (

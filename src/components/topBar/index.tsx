@@ -14,6 +14,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import { grey } from "@mui/material/colors";
 import Image from "next/image";
 import Link from "next/link";
+import { useTokenStore } from "@/store/useTokenStore";
 
 const pages = [
   ["Moje zestawy", "mysets"],
@@ -22,7 +23,7 @@ const pages = [
 ];
 
 function TopBar() {
-  const [authenticated, setAuthenticated] = React.useState<boolean>(false);
+  const token = useTokenStore((state) => state.token);
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
@@ -139,12 +140,12 @@ function TopBar() {
               onClose={handleCloseUserMenu}
             >
               <Link
-                href={authenticated ? "/" : "/loginpage"}
-                key={authenticated ? "mainPage" : "loginPage"}
+                href={token !== "" ? "/logout" : "/loginpage"}
+                key={token !== "" ? "mainPage" : "loginPage"}
               >
                 <MenuItem onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">
-                    {authenticated ? "Wyloguj się" : "Zaloguj się"}
+                    {token !== "" ? "Wyloguj się" : "Zaloguj się"}
                   </Typography>
                 </MenuItem>
               </Link>

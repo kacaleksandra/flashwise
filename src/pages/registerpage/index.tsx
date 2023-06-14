@@ -2,8 +2,16 @@ import Link from "next/link";
 import { Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import classes from "src/styles/forms.module.css";
+import CoreInput from "@/components/Core/Input";
+import { useState } from "react";
+import { useRouter } from "next/router";
+import { useTokenStore } from "@/store/useTokenStore";
 
+// schemat walidacji
 const validationSchema = Yup.object().shape({
+  login: Yup.string()
+    .min(3, "Za krótki login")
+    .required("To pole jest wymagane"),
   email: Yup.string()
     .email("Nieprawidłowy adres e-mail")
     .required("To pole jest wymagane"),
@@ -15,7 +23,41 @@ const validationSchema = Yup.object().shape({
     .required("To pole jest wymagane"),
 });
 
+// rejestracja (fetch)
+interface RegisterResponse {
+  key: string;
+}
+
+async function RegisterUser(
+  username: string,
+  email: string,
+  password1: string,
+  password2: string
+): Promise<string> {
+  try {
+    const response = await fetch("http://vbujdewvbj.cfolks.pl/api/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, email, password1, password2 }),
+    });
+
+    const data = (await response.json()) as RegisterResponse;
+
+    if (!response.ok) {
+      throw new Error("UserExists error");
+    }
+    return data.key;
+  } catch (error) {
+    throw new Error("RegisterUser error");
+  }
+}
+
 export default function Register() {
+  const { setToken } = useTokenStore();
+  const [isError, setIsError] = useState(false);
+
+  const router = useRouter();
+
   return (
     <>
       <section className="bg-gradient-to-b from-gray-100 to-white">
@@ -25,20 +67,65 @@ export default function Register() {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-blue-500 md:text-2xl">
                 Zarejestruj się!
               </h1>
+              {isError && (
+                <div className="text-red-600">
+                  Wystąpił błąd w czasie rejestracji lub użytkownik z daną
+                  nazwą/mailem już istnieje.
+                </div>
+              )}
               <Formik
-                initialValues={{ email: "", password: "", confirmPassword: "" }}
+                initialValues={{
+                  login: "",
+                  email: "",
+                  password: "",
+                  confirmPassword: "",
+                }}
                 validationSchema={validationSchema}
-                onSubmit={(values) => {
-                  console.log(values);
+                onSubmit={async (values) => {
+                  try {
+                    const { login, email, password, confirmPassword } = values;
+                    const token = await RegisterUser(
+                      login,
+                      email,
+                      password,
+                      confirmPassword
+                    );
+                    setToken(token);
+                    router.push("/succesful");
+                  } catch (error) {
+                    setIsError(true);
+                  }
                 }}
               >
-                {({ errors, touched }) => (
-                  <form className="space-y-4 md:space-y-6" action="#">
+                {({ handleSubmit, errors, touched }) => (
+                  <form
+                    className="space-y-4 md:space-y-6"
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      handleSubmit();
+                    }}
+                  >
+                    <div>
+                      <label htmlFor="login" className={classes.labels}>
+                        Login
+                      </label>
+                      <CoreInput
+                        type="login"
+                        name="login"
+                        id="login"
+                        placeholder="username"
+                      />
+                      <ErrorMessage
+                        component="span"
+                        name="login"
+                        className="text-sm text-red-600"
+                      />
+                    </div>
                     <div>
                       <label htmlFor="email" className={classes.labels}>
-                        e-mail
+                        E-mail
                       </label>
-                      <Field
+                      <CoreInput
                         type="email"
                         name="email"
                         id="email"
@@ -55,12 +142,11 @@ export default function Register() {
                       <label htmlFor="password" className={classes.labels}>
                         Hasło
                       </label>
-                      <Field
+                      <CoreInput
                         type="password"
                         name="password"
                         id="password"
-                        placeholder=""
-                        className={classes.inputs}
+                        placeholder="••••••••"
                       />
                       <ErrorMessage
                         component="span"
@@ -76,12 +162,11 @@ export default function Register() {
                         Powtórz hasło
                       </label>
 
-                      <Field
+                      <CoreInput
                         type="password"
                         id="confirm-password"
                         name="confirmPassword"
-                        placeholder=""
-                        className={classes.inputs}
+                        placeholder="••••••••"
                       />
                       <ErrorMessage
                         component="span"
