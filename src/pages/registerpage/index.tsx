@@ -91,6 +91,7 @@ export default function Register() {
                       confirmPassword
                     );
                     setToken(token);
+                    localStorage.setItem("myToken", token);
                     router.push("/succesful");
                   } catch (error) {
                     setIsError(true);

@@ -116,7 +116,6 @@ function TopBar() {
               </Link>
             ))}
           </Box>
-
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Ustawienia">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

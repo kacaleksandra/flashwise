@@ -7,6 +7,7 @@ export default function Logout() {
   const { setToken } = useTokenStore();
   useEffect(() => {
     setToken("");
+    localStorage.removeItem("myToken");
   }, []);
 
   return (
