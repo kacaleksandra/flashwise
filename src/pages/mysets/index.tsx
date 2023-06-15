@@ -45,11 +45,11 @@ export default function MySets() {
         <Breadcrumb name="Moje zestawy" />
       </div>
 
-      {isLoading ? (
+      {isLoading && token !== "" ? (
         <div className="flex justify-center items-center">
           <CircularProgress color="primary" />
         </div>
-      ) : sets.length === 0 ? (
+      ) : sets.length === 0 || token === "" ? (
         <AnimationPage descr="Nic tu nie ma..." animation={nothing} />
       ) : (
         <div className="sm:grid sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
