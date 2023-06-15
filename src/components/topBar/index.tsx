@@ -16,14 +16,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { useTokenStore } from "@/store/useTokenStore";
 
-const pages = [
-  ["Moje zestawy", "mysets"],
-  ["Kategorie", "categories"],
-  ["Utwórz nowy zestaw", "newset"],
-];
-
 function TopBar() {
   const token = useTokenStore((state) => state.token);
+
+  const pages =
+    token === ""
+      ? [["Kategorie", "categories"]]
+      : [
+          ["Moje zestawy", "mysets"],
+          ["Kategorie", "categories"],
+          ["Utwórz nowy zestaw", "newset"],
+        ];
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
