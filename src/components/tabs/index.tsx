@@ -4,6 +4,7 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Link from "next/link";
+import { Set } from "@/pages/categories";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -18,6 +19,7 @@ interface ICategories {
 
 interface CategoryTabsProps {
   categories: ICategories[];
+  sets: Set[];
 }
 
 function TabPanel(props: TabPanelProps) {
@@ -40,7 +42,7 @@ function TabPanel(props: TabPanelProps) {
   );
 }
 
-export default function CategoryTabs({ categories }: CategoryTabsProps) {
+export default function CategoryTabs({ categories, sets }: CategoryTabsProps) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -62,17 +64,26 @@ export default function CategoryTabs({ categories }: CategoryTabsProps) {
           ))}
         </Tabs>
       </Box>
-      {categories.map((item, index) => (
-        <TabPanel value={value} index={index} key={index}>
+
+      {categories.map((category, categoryIndex) => (
+        <TabPanel
+          value={value}
+          index={categoryIndex}
+          key={`tab-panel-${categoryIndex}`}
+        >
           <div className="sm:grid sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-            {item.sets.map((value, valueIndex) => (
-              <div
-                key={valueIndex}
-                className="p-7 m-6 bg-blue-500 text-white text-center shadow-xl rounded-md flex items-center justify-center"
-              >
-                <Link href="/">{value}</Link>
-              </div>
-            ))}
+            {category.sets.map((setName, setIndex) => {
+              const set = sets.find((set) => set.name === setName);
+              if (!set) return null;
+              return (
+                <div
+                  key={`${categoryIndex}-${set.id}`}
+                  className="p-7 m-6 bg-blue-500 text-white text-center shadow-xl rounded-md flex items-center justify-center"
+                >
+                  <Link href={`/set/${set.id}`}>{setName}</Link>
+                </div>
+              );
+            })}
           </div>
         </TabPanel>
       ))}

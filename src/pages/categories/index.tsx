@@ -14,7 +14,7 @@ interface OneCategory {
   category: string;
 }
 
-interface Set {
+export interface Set {
   id: number;
   name: string;
   category: number;
@@ -89,13 +89,12 @@ export default function Categories() {
         category.sets = setsForCategory;
         acc.push(category);
       }
-      console.log(acc);
 
       return acc;
     }, []);
   }
-
   const categoriesWSets = groupSetsByCategory(categories, sets);
+  console.log(sets);
 
   return (
     <>
@@ -108,7 +107,7 @@ export default function Categories() {
         </div>
       ) : (
         <div className="mx-1 px-0">
-          <CategoryTabs categories={categoriesWSets} />
+          <CategoryTabs categories={categoriesWSets} sets={sets} />
         </div>
       )}
     </>
