@@ -9,7 +9,7 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().required("To pole jest wymagane"),
 });
 
-export default function MyProfile() {
+export default function Login() {
   return (
     <>
       <section className="bg-gradient-to-b from-gray-100 to-white py-10">
