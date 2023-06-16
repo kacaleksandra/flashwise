@@ -18,11 +18,6 @@ export default function BottomBar() {
                 Strona główna
               </Link>
             </li>
-            <li>
-              <Link href="/categories" className="mr-4 hover:underline md:mr-6">
-                Kategorie
-              </Link>
-            </li>
           </ul>
         </div>
       </footer>

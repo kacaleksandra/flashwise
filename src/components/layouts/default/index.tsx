@@ -13,13 +13,17 @@ export function DefaultLayout({ children }: IDefaultLayoutProps) {
   const unprotectedPages = ["/", "/loginpage", "/registerpage"];
   const router = useRouter();
   const currentPath = router.pathname;
+
+  // Sprawdzamy, czy użytkownik jest zalogowany i czy aktualna ścieżka znajduje się na liście stron bez wymaganej autoryzacji
+  const isUnprotectedPage = unprotectedPages.includes(currentPath);
+  const shouldRenderChildren =
+    (token !== "" && !isUnprotectedPage) || (!token && isUnprotectedPage);
+
   return (
     <>
       <div className="flex flex-col min-h-screen">
         <TopBar />
-        {token !== "" ? (
-          <div className="flex-grow">{children}</div>
-        ) : unprotectedPages.includes(currentPath) ? (
+        {shouldRenderChildren ? (
           <div className="flex-grow">{children}</div>
         ) : (
           <Custom404 />
