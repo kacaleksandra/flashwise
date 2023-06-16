@@ -12,8 +12,8 @@ interface TabPanelProps {
 }
 
 interface ICategories {
-  label: string;
-  values: string[];
+  category: string;
+  sets: string[];
 }
 
 interface CategoryTabsProps {
@@ -58,14 +58,14 @@ export default function CategoryTabs({ categories }: CategoryTabsProps) {
           aria-label="basic tabs example"
         >
           {categories.map((item, index) => (
-            <Tab label={item.label} key={index} />
+            <Tab label={item.category} key={index} />
           ))}
         </Tabs>
       </Box>
       {categories.map((item, index) => (
         <TabPanel value={value} index={index} key={index}>
           <div className="sm:grid sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-            {item.values.map((value, valueIndex) => (
+            {item.sets.map((value, valueIndex) => (
               <div
                 key={valueIndex}
                 className="p-7 m-6 bg-blue-500 text-white text-center shadow-xl rounded-md flex items-center justify-center"
