@@ -61,9 +61,19 @@ export default function Categories() {
           },
         });
         const data = await response.json();
-        setSets(
-          data.map(({ id, name, category }: Set) => ({ id, name, category }))
-        );
+        // Dodajemy tylko te sety, które mają status 'public'
+        for (const set of data) {
+          if (set.status === "public") {
+            newSets.push({
+              id: set.id,
+              name: set.name,
+              category: set.category,
+            });
+          }
+        }
+
+        // Ustawiamy nową tablicę z filtrami
+        setSets(newSets);
       } catch (error) {
         console.error(error);
       }
