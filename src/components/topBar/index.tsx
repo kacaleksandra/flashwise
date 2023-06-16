@@ -21,7 +21,10 @@ function TopBar() {
 
   const pages =
     token === ""
-      ? [["Kategorie", "categories"]]
+      ? [
+          ["Rejestracja", "registerpage"],
+          ["Logowanie", "loginpage"],
+        ]
       : [
           ["Moje zestawy", "mysets"],
           ["Kategorie", "categories"],
