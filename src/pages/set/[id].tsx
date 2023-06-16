@@ -13,7 +13,6 @@ interface IFlashcard {
 export default function Set() {
   const token = useTokenStore((state) => state.token);
   const router = useRouter();
-  //const [nameOnly, setNameOnly] = useState<string>("");
 
   async function fetchFlashcards(nameOnly: string): Promise<void> {
     try {
@@ -45,11 +44,7 @@ export default function Set() {
     const id = window.location.pathname.substring(
       window.location.pathname.lastIndexOf("/") + 1
     );
-    //console.error(x);
-
-    //const { id } = router.query as { id: string };
     const nameOnly = id.substring(id.indexOf("-") + 1);
-    //setNameOnly(nameOnly);
 
     fetchFlashcards(nameOnly);
   }, []);
