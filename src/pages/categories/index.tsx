@@ -12,6 +12,7 @@ interface Category {
 
 interface OneCategory {
   category: string;
+  sets: string[];
 }
 
 export interface Set {
@@ -21,6 +22,7 @@ export interface Set {
   status?: string;
   is_premium?: boolean;
   tag?: string;
+  sets?: string[];
 }
 
 export default function Categories() {
@@ -85,8 +87,8 @@ export default function Categories() {
   }, []);
 
   function groupSetsByCategory(categories: Category[], sets: Set[]) {
-    return categories.reduce((acc: any, curr) => {
-      const category: any = { category: curr.name };
+    return categories.reduce<OneCategory[]>((acc, curr) => {
+      const category: OneCategory = { category: curr.name, sets: [] };
       const setsForCategory = [];
 
       for (const set of sets) {
