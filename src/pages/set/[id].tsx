@@ -16,11 +16,13 @@ import Button from "@mui/material/Button";
 import { useMySetsStore } from "@/store/useMySetsStore";
 import { useRouter } from "next/router";
 import ISet from "@/interfaces/Set";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export default function Set() {
   const token = useTokenStore((state) => state.token);
   const mySets = useMySetsStore((state) => state.sets);
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   async function getSet(): Promise<ISet> {
     const id = window.location.pathname.substring(
@@ -64,6 +66,8 @@ export default function Set() {
       setFlashcards(data);
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   }
   const [flashcards, setFlashcards] = useState<IFlashcard[]>([]);
@@ -107,76 +111,95 @@ export default function Set() {
 
   return (
     <>
-      <div className="px-5 py-3 mt-3 w-full flex justify-around">
-        <div>
-          <Typography variant="h4" className="text-blue-500">
-            {setName}
-          </Typography>
+      {isLoading && token !== "" ? (
+        <div className="flex justify-center items-center">
+          <CircularProgress color="primary" />
         </div>
-        <Button variant="contained" className="bg-blue-500 text-white">
-          Przejdź do fiszek
-        </Button>
-        <Button variant="contained" className="bg-blue-500 text-white">
-          Wygeneruj quiz
-        </Button>
-
-        <Button variant="contained" className="bg-blue-500 text-white">
-          Edytuj
-        </Button>
-      </div>
-      <div className="flex justify-center my-5">
-        <TableContainer component={Paper} className="w-11/12">
-          <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
-            <TableHead>
-              <TableRow className="bg-blue-50">
-                <TableCell align="center">Przód fiszki</TableCell>
-                <TableCell align="center">Tył fiszki</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {(rowsPerPage > 0
-                ? rows.slice(
-                    page * rowsPerPage,
-                    page * rowsPerPage + rowsPerPage
-                  )
-                : rows
-              ).map((row) => (
-                <TableRow key={row.front}>
-                  <TableCell scope="row" align="center">
-                    {row.front}
-                  </TableCell>
-                  <TableCell align="center">{row.back}</TableCell>
-                </TableRow>
-              ))}
-              {emptyRows > 0 && (
-                <TableRow style={{ height: 53 * emptyRows }}>
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-            <TableFooter>
-              <TableRow>
-                <TablePagination
-                  rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-                  colSpan={3}
-                  count={rows.length}
-                  rowsPerPage={rowsPerPage}
-                  page={page}
-                  SelectProps={{
-                    inputProps: {
-                      "aria-label": "Wierszy na stronę",
-                    },
-                    native: true,
-                  }}
-                  onPageChange={handleChangePage}
-                  onRowsPerPageChange={handleChangeRowsPerPage}
-                  ActionsComponent={st.TablePaginationActions}
-                />
-              </TableRow>
-            </TableFooter>
-          </Table>
-        </TableContainer>
-      </div>
+      ) : (
+        <div>
+          <div className="px-5 py-3 mt-3 w-full flex justify-around">
+            <div>
+              <Typography variant="h4" className="text-blue-500">
+                {setName}
+              </Typography>
+            </div>
+            <Button variant="contained" className="bg-blue-500 text-white">
+              Przejdź do nauki
+            </Button>
+            <Button variant="contained" className="bg-blue-500 text-white">
+              Wygeneruj quiz
+            </Button>
+            {mySets.find((set) => set.name === setName) !== undefined ? (
+              <Button variant="contained" className="bg-blue-500 text-white">
+                Edytuj
+              </Button>
+            ) : (
+              ""
+            )}
+          </div>
+          <div className="flex justify-center my-5">
+            <TableContainer component={Paper} className="w-11/12">
+              <Table
+                sx={{ minWidth: 500 }}
+                aria-label="custom pagination table"
+              >
+                <TableHead>
+                  <TableRow className="bg-blue-50">
+                    <TableCell align="center">Przód fiszki</TableCell>
+                    <TableCell align="center">Tył fiszki</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {(rowsPerPage > 0
+                    ? rows.slice(
+                        page * rowsPerPage,
+                        page * rowsPerPage + rowsPerPage
+                      )
+                    : rows
+                  ).map((row) => (
+                    <TableRow key={row.front}>
+                      <TableCell scope="row" align="center">
+                        {row.front}
+                      </TableCell>
+                      <TableCell align="center">{row.back}</TableCell>
+                    </TableRow>
+                  ))}
+                  {emptyRows > 0 && (
+                    <TableRow style={{ height: 53 * emptyRows }}>
+                      <TableCell colSpan={6} />
+                    </TableRow>
+                  )}
+                </TableBody>
+                <TableFooter>
+                  <TableRow>
+                    <TablePagination
+                      rowsPerPageOptions={[
+                        5,
+                        10,
+                        25,
+                        { label: "All", value: -1 },
+                      ]}
+                      colSpan={3}
+                      count={rows.length}
+                      rowsPerPage={rowsPerPage}
+                      page={page}
+                      SelectProps={{
+                        inputProps: {
+                          "aria-label": "Wierszy na stronę",
+                        },
+                        native: true,
+                      }}
+                      onPageChange={handleChangePage}
+                      onRowsPerPageChange={handleChangeRowsPerPage}
+                      ActionsComponent={st.TablePaginationActions}
+                    />
+                  </TableRow>
+                </TableFooter>
+              </Table>
+            </TableContainer>
+          </div>{" "}
+        </div>
+      )}
     </>
   );
 }

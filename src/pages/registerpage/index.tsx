@@ -6,6 +6,7 @@ import CoreLabel from "@/components/Core/Label";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { useTokenStore } from "@/store/useTokenStore";
+import ITokenResponse from "@/interfaces/TokenResponse";
 
 // schemat walidacji
 const validationSchema = Yup.object().shape({
@@ -24,9 +25,6 @@ const validationSchema = Yup.object().shape({
 });
 
 // rejestracja (fetch)
-interface RegisterResponse {
-  key: string;
-}
 
 async function RegisterUser(
   username: string,
@@ -41,7 +39,7 @@ async function RegisterUser(
       body: JSON.stringify({ username, email, password1, password2 }),
     });
 
-    const data = (await response.json()) as RegisterResponse;
+    const data = (await response.json()) as ITokenResponse;
 
     if (!response.ok) {
       throw new Error("UserExists error");
@@ -55,7 +53,6 @@ async function RegisterUser(
 export default function Register() {
   const { setToken } = useTokenStore();
   const [isError, setIsError] = useState(false);
-
   const router = useRouter();
 
   return (
