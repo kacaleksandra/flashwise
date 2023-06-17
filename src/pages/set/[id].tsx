@@ -24,7 +24,11 @@ export default function Set() {
   const mySets = useMySetsStore((state) => state.sets);
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [id, setID] = useState<string>("");
+  const [id, setID] = useState<string>(
+    window.location.pathname.substring(
+      window.location.pathname.lastIndexOf("/") + 1
+    )
+  );
 
   async function getSet(): Promise<ISet> {
     const id = window.location.pathname.substring(
