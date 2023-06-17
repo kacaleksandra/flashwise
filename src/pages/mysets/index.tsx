@@ -5,15 +5,11 @@ import nothing from "../../lotties/nothing.json";
 import { useEffect, useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useTokenStore } from "@/store/useTokenStore";
-
-interface Set {
-  id: number;
-  name: string;
-}
+import ISet from "@/interfaces/Set";
 
 export default function MySets() {
   const token = useTokenStore((state) => state.token);
-  const [sets, setSets] = useState<Set[]>([]);
+  const [sets, setSets] = useState<ISet[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -29,7 +25,9 @@ export default function MySets() {
           );
 
           const data = await response.json();
-          setSets(data.map(({ id, name }: Set) => ({ id, name })));
+          setSets(
+            data.map(({ id, name, category }: ISet) => ({ id, name, category }))
+          );
         }
       } catch (error) {
         console.error(error);
@@ -53,12 +51,12 @@ export default function MySets() {
         <AnimationPage descr="Nic tu nie ma..." animation={nothing} />
       ) : (
         <div className="sm:grid sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-          {sets.map(({ id, name }, valueIndex) => (
+          {sets.map(({ id, name, category }, valueIndex) => (
             <div
               key={valueIndex}
               className="p-7 m-6 bg-blue-500 text-white text-center shadow-xl rounded-md flex items-center justify-center"
             >
-              <Link href="/">{name}</Link>
+              <Link href={`/set/${category + "-" + name}`}>{name}</Link>
             </div>
           ))}
         </div>

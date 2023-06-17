@@ -1,20 +1,15 @@
 import * as React from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Link from "next/link";
 import { Set } from "@/pages/categories";
+import ICategories from "@/interfaces/Categories";
 
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
   value: number;
-}
-
-interface ICategories {
-  category: string;
-  sets: string[];
 }
 
 interface CategoryTabsProps {

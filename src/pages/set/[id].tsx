@@ -2,13 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useTokenStore } from "@/store/useTokenStore";
 import CircularProgress from "@mui/material/CircularProgress";
-
-interface IFlashcard {
-  id: number;
-  front: string;
-  back: string;
-  flashcard_set: number;
-}
+import IFlashcard from "@/interfaces/Flashcard";
 
 export default function Set() {
   const token = useTokenStore((state) => state.token);
