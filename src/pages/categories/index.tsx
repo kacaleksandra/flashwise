@@ -3,12 +3,7 @@ import Breadcrumb from "../../components/breadcrumb";
 import CategoryTabs from "../../components/tabs";
 import { useTokenStore } from "@/store/useTokenStore";
 import CircularProgress from "@mui/material/CircularProgress";
-
-interface Category {
-  id: number;
-  name: string;
-  level?: number;
-}
+import ICategory from "@/interfaces/Category";
 
 interface OneCategory {
   category: string;
@@ -27,7 +22,7 @@ export interface Set {
 
 export default function Categories() {
   const token = useTokenStore((state) => state.token);
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [categories, setCategories] = useState<ICategory[]>([]);
   const [sets, setSets] = useState<Set[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -46,7 +41,7 @@ export default function Categories() {
         );
         const data = await response.json();
         setCategories(
-          data.map(({ id, name, level }: Category) => ({ id, name }))
+          data.map(({ id, name, level }: ICategory) => ({ id, name }))
         );
       } catch (error) {
         console.error(error);
@@ -86,7 +81,7 @@ export default function Categories() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  function groupSetsByCategory(categories: Category[], sets: Set[]) {
+  function groupSetsByCategory(categories: ICategory[], sets: Set[]) {
     return categories.reduce<OneCategory[]>((acc, curr) => {
       const category: OneCategory = { category: curr.name, sets: [] };
       const setsForCategory = [];
