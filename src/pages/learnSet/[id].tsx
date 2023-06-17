@@ -6,11 +6,12 @@ import router from "next/router";
 import IFlashcard from "@/interfaces/Flashcard";
 import ISet from "@/interfaces/Set";
 import { CircularProgress } from "@mui/material";
+import { AnyARecord } from "dns";
 
 export default function LearnSet() {
   const token = useTokenStore((state) => state.token);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [flashcards, setFlashcards] = useState<FlashcardArrayProps[]>([]);
+  const [flashcards, setFlashcards] = useState<any>([]);
 
   async function getSet(): Promise<ISet> {
     const id = window.location.pathname.substring(
