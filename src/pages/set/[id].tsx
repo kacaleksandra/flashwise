@@ -17,17 +17,20 @@ import { useMySetsStore } from "@/store/useMySetsStore";
 import { useRouter } from "next/router";
 import ISet from "@/interfaces/Set";
 import CircularProgress from "@mui/material/CircularProgress";
+import Link from "next/link";
 
 export default function Set() {
   const token = useTokenStore((state) => state.token);
   const mySets = useMySetsStore((state) => state.sets);
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [id, setID] = useState<string>("");
 
   async function getSet(): Promise<ISet> {
     const id = window.location.pathname.substring(
       window.location.pathname.lastIndexOf("/") + 1
     );
+    setID(id);
 
     const response = await fetch(
       `http://vbujdewvbj.cfolks.pl/api/sets?flashcard_set_id=` + id,
@@ -123,7 +126,12 @@ export default function Set() {
                 {setName}
               </Typography>
             </div>
-            <Button variant="contained" className="bg-blue-500 text-white">
+            <Button
+              variant="contained"
+              className="bg-blue-500 text-white"
+              component={Link}
+              href={`/learnSet/${id}`}
+            >
               Przejdź do nauki
             </Button>
             <Button variant="contained" className="bg-blue-500 text-white">

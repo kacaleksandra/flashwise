@@ -7,7 +7,7 @@ export default function Succesful() {
   return (
     <>
       <AnimationPage
-        descr="Pomyślnie zarejestrowano! Jesteś już zalogowany."
+        descr="Wszystko poszło pomyślnie! Jesteś już zalogowany."
         animation={success}
       />
     </>
