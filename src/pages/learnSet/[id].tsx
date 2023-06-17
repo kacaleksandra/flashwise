@@ -6,7 +6,6 @@ import router from "next/router";
 import IFlashcard from "@/interfaces/Flashcard";
 import ISet from "@/interfaces/Set";
 import { CircularProgress } from "@mui/material";
-import { AnyARecord } from "dns";
 
 export default function LearnSet() {
   const token = useTokenStore((state) => state.token);

@@ -142,7 +142,12 @@ export default function Set() {
               Wygeneruj quiz
             </Button>
             {mySets.find((set) => set.name === setName) !== undefined ? (
-              <Button variant="contained" className="bg-blue-500 text-white">
+              <Button
+                variant="contained"
+                className="bg-blue-500 text-white"
+                component={Link}
+                href={`/editpage/${id}`}
+              >
                 Edytuj
               </Button>
             ) : (
