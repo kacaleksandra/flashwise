@@ -75,9 +75,7 @@ export default function CategoryTabs({ categories, sets }: CategoryTabsProps) {
                   key={`${categoryIndex}-${set.id}`}
                   className="p-7 m-6 bg-blue-500 text-white text-center shadow-xl rounded-md flex items-center justify-center"
                 >
-                  <Link href={`/set/${set.category + "-" + set.name}`}>
-                    {setName}
-                  </Link>
+                  <Link href={`/set/${set.id}`}>{setName}</Link>
                 </div>
               );
             })}

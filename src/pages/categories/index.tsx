@@ -106,7 +106,6 @@ export default function Categories() {
     }, []);
   }
   const categoriesWSets = groupSetsByCategory(categories, sets);
-  console.log(sets);
 
   return (
     <>
