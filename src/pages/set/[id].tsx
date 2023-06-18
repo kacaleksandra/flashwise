@@ -19,9 +19,10 @@ import ISet from "@/interfaces/Set";
 import CircularProgress from "@mui/material/CircularProgress";
 import Link from "next/link";
 import getRouteParameter from "@/functions/GetRouteParameter";
+import GetToken from "@/functions/GetToken";
 
 export default function Set() {
-  const token = useTokenStore((state) => state.token);
+  const token = GetToken();
   const mySets = useMySetsStore((state) => state.sets);
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(true);

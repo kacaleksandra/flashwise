@@ -14,6 +14,7 @@ export default async function checkQuiz(
           Authorization: `Token ${token}`,
           "Content-Type": "application/json",
         },
+        body: JSON.stringify(result),
       }
     );
     const data = await response.json();

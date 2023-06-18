@@ -17,10 +17,10 @@ import { Switch } from "@mui/material";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import ICategory from "@/interfaces/Category";
-import { useTokenStore } from "@/store/useTokenStore";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useRouter } from "next/router";
+import GetToken from "@/functions/GetToken";
 
 interface Card {
   front: string;
@@ -29,7 +29,7 @@ interface Card {
 
 export default function NewSet() {
   const router = useRouter();
-  const token = useTokenStore((state) => state.token);
+  const token = GetToken();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [cards, setCards] = useState<Card[]>([{ front: "", back: "" }]);
   // Stan dla pola nazwa zestawu

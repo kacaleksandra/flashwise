@@ -1,9 +1,9 @@
 import success from "../../lotties/success.json";
 import { AnimationPage } from "../../components/animationPage";
-import { useTokenStore } from "@/store/useTokenStore";
+import GetToken from "@/functions/GetToken";
 
 export default function Succesful() {
-  const token = useTokenStore((state) => state.token);
+  const token = GetToken();
   return (
     <>
       <AnimationPage

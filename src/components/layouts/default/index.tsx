@@ -1,15 +1,15 @@
 import TopBar from "../../topBar";
 import BottomBar from "@/components/bottomBar/BottomBar";
-import { useTokenStore } from "@/store/useTokenStore";
 import Custom404 from "@/pages/";
 import { useRouter } from "next/router";
+import GetToken from "@/functions/GetToken";
 
 interface IDefaultLayoutProps {
   children: React.ReactNode;
 }
 
 export function DefaultLayout({ children }: IDefaultLayoutProps) {
-  const token = useTokenStore((state) => state.token);
+  const token = GetToken();
   const unprotectedPages = ["/", "/loginpage", "/registerpage"];
   const router = useRouter();
   const currentPath = router.pathname;

@@ -1,4 +1,3 @@
-import { useTokenStore } from "@/store/useTokenStore";
 import { useState, useEffect } from "react";
 import { FlashcardArray } from "react-quizlet-flashcard";
 import FlashcardArrayProps from "react-quizlet-flashcard/dist/interfaces/IFlashcardArray";
@@ -7,9 +6,10 @@ import IFlashcard from "@/interfaces/Flashcard";
 import ISet from "@/interfaces/Set";
 import { CircularProgress } from "@mui/material";
 import getRouteParameter from "@/functions/GetRouteParameter";
+import GetToken from "@/functions/GetToken";
 
 export default function LearnSet() {
-  const token = useTokenStore((state) => state.token);
+  const token = GetToken();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [flashcards, setFlashcards] = useState<any>([]);
 

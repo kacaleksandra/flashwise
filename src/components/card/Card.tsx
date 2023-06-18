@@ -1,18 +1,12 @@
 import Image from "next/image";
-
-interface IimgDescr {
-  imgName: string;
-  studentName: string;
-  alternativeText: string;
-  opinion: string;
-}
+import { IImgDescr } from "@/interfaces/ImgDescr";
 
 export default function Card({
   imgName,
   studentName,
   alternativeText,
   opinion,
-}: IimgDescr) {
+}: IImgDescr) {
   return (
     <>
       <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white">

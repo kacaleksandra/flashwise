@@ -1,29 +1,20 @@
 import { useEffect, useState } from "react";
 import Breadcrumb from "../../components/breadcrumb";
 import CategoryTabs from "../../components/tabs";
-import { useTokenStore } from "@/store/useTokenStore";
 import CircularProgress from "@mui/material/CircularProgress";
 import ICategory from "@/interfaces/Category";
+import GetToken from "@/functions/GetToken";
+import ISet from "@/interfaces/Set";
 
 interface OneCategory {
   category: string;
   sets: string[];
 }
 
-export interface Set {
-  id: number;
-  name: string;
-  category: number;
-  status?: string;
-  is_premium?: boolean;
-  tag?: string;
-  sets?: string[];
-}
-
 export default function Categories() {
-  const token = useTokenStore((state) => state.token);
+  const token = GetToken();
   const [categories, setCategories] = useState<ICategory[]>([]);
-  const [sets, setSets] = useState<Set[]>([]);
+  const [sets, setSets] = useState<ISet[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -50,7 +41,7 @@ export default function Categories() {
 
     async function fetchSets(): Promise<void> {
       try {
-        let newSets: Set[] = [];
+        let newSets: ISet[] = [];
         const response = await fetch(`https://vbujdewvbj.cfolks.pl/api/sets?`, {
           method: "GET",
           headers: {
@@ -81,7 +72,7 @@ export default function Categories() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  function groupSetsByCategory(categories: ICategory[], sets: Set[]) {
+  function groupSetsByCategory(categories: ICategory[], sets: ISet[]) {
     return categories.reduce<OneCategory[]>((acc, curr) => {
       const category: OneCategory = { category: curr.name, sets: [] };
       const setsForCategory = [];

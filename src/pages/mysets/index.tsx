@@ -4,12 +4,12 @@ import { AnimationPage } from "@/components/animationPage";
 import nothing from "../../lotties/nothing.json";
 import { useEffect, useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
-import { useTokenStore } from "@/store/useTokenStore";
 import ISet from "@/interfaces/Set";
 import { useMySetsStore } from "@/store/useMySetsStore";
+import GetToken from "@/functions/GetToken";
 
 export default function MySets() {
-  const token = useTokenStore((state) => state.token);
+  const token = GetToken();
   const [sets, setSets] = useState<ISet[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { setMySets } = useMySetsStore();

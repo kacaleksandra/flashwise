@@ -17,17 +17,17 @@ import { Switch } from "@mui/material";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import ICategory from "@/interfaces/Category";
-import { useTokenStore } from "@/store/useTokenStore";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useRouter } from "next/router";
 import ISet from "@/interfaces/Set";
 import IFlashcard from "@/interfaces/Flashcard";
 import getRouteParameter from "@/functions/GetRouteParameter";
+import GetToken from "@/functions/GetToken";
 
 export default function EditPage() {
   const router = useRouter();
-  const token = useTokenStore((state) => state.token);
+  const token = GetToken();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [cards, setCards] = useState<IFlashcard[]>([{ front: "", back: "" }]);
   const [deletedCards, setDeletedCards] = useState<IFlashcard[]>([]);

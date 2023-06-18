@@ -1,4 +1,4 @@
-import { useTokenStore } from "@/store/useTokenStore";
+import GetToken from "@/functions/GetToken";
 import { getGeneratedQuiz } from "@/functions/GetGeneratedQuiz";
 import { useEffect, useState } from "react";
 import getRouteParameter from "@/functions/GetRouteParameter";
@@ -18,7 +18,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 export default function Quiz() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const token = useTokenStore((state) => state.token);
+  const token = GetToken();
   const [generatedQuiz, setGeneratedQuiz] = useState<IQuiz>();
   const [isAllChecked, setIsAllChecked] = useState<boolean>(false);
   const [answers, setAnswers] = useState<{ [key: number]: string }>({});
