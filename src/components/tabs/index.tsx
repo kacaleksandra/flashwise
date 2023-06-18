@@ -3,8 +3,8 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import Link from "next/link";
-import { Set } from "@/pages/categories";
 import ICategories from "@/interfaces/Categories";
+import ISet from "@/interfaces/Set";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -14,7 +14,7 @@ interface TabPanelProps {
 
 interface CategoryTabsProps {
   categories: ICategories[];
-  sets: Set[];
+  sets: ISet[];
 }
 
 function TabPanel(props: TabPanelProps) {
