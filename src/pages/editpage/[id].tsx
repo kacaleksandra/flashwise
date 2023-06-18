@@ -23,6 +23,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { useRouter } from "next/router";
 import ISet from "@/interfaces/Set";
 import IFlashcard from "@/interfaces/Flashcard";
+import getRouteParameter from "@/functions/GetRouteParameter";
 
 export default function EditPage() {
   const router = useRouter();
@@ -115,11 +116,6 @@ export default function EditPage() {
     setCategoryID(parseInt(event.target.value));
   };
 
-  function getRouteParameter() {
-    return window.location.pathname.substring(
-      window.location.pathname.lastIndexOf("/") + 1
-    );
-  }
   // POBIERANIE DANYCH
   async function getSetInfo(): Promise<string> {
     try {

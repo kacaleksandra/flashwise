@@ -6,6 +6,7 @@ import router from "next/router";
 import IFlashcard from "@/interfaces/Flashcard";
 import ISet from "@/interfaces/Set";
 import { CircularProgress } from "@mui/material";
+import getRouteParameter from "@/functions/GetRouteParameter";
 
 export default function LearnSet() {
   const token = useTokenStore((state) => state.token);
@@ -13,9 +14,7 @@ export default function LearnSet() {
   const [flashcards, setFlashcards] = useState<any>([]);
 
   async function getSet(): Promise<ISet> {
-    const id = window.location.pathname.substring(
-      window.location.pathname.lastIndexOf("/") + 1
-    );
+    const id = getRouteParameter();
 
     const response = await fetch(
       `http://vbujdewvbj.cfolks.pl/api/sets?flashcard_set_id=` + id,

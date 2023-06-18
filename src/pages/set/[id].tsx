@@ -18,22 +18,17 @@ import { useRouter } from "next/router";
 import ISet from "@/interfaces/Set";
 import CircularProgress from "@mui/material/CircularProgress";
 import Link from "next/link";
+import getRouteParameter from "@/functions/GetRouteParameter";
 
 export default function Set() {
   const token = useTokenStore((state) => state.token);
   const mySets = useMySetsStore((state) => state.sets);
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [id, setID] = useState<string>(
-    window.location.pathname.substring(
-      window.location.pathname.lastIndexOf("/") + 1
-    )
-  );
+  const [id, setID] = useState<string>(getRouteParameter());
 
   async function getSet(): Promise<ISet> {
-    const id = window.location.pathname.substring(
-      window.location.pathname.lastIndexOf("/") + 1
-    );
+    const id = getRouteParameter();
     setID(id);
 
     const response = await fetch(
