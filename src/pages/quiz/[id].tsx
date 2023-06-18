@@ -114,7 +114,7 @@ export default function Quiz() {
               Sprawdź
             </Button>
           ) : (
-            <Typography>
+            <Typography className="text-blue-500 text-lg font-bold">
               {finalScore === undefined
                 ? "Wystąpił błąd w czasie sprawdzania quizu"
                 : `${finalScore}/${generatedQuiz?.questions?.length}`}

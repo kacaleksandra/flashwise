@@ -5,6 +5,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import ICategory from "@/interfaces/Category";
 import GetToken from "@/functions/GetToken";
 import ISet from "@/interfaces/Set";
+import { fetchCategories } from "@/functions/fetchCategories";
 
 interface OneCategory {
   category: string;
@@ -17,58 +18,36 @@ export default function Categories() {
   const [sets, setSets] = useState<ISet[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  useEffect(() => {
-    //fetch categories
-    async function fetchCategories(): Promise<void> {
-      try {
-        const response = await fetch(
-          "http://vbujdewvbj.cfolks.pl/api/category",
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Token ${token}`,
-            },
-          }
-        );
-        const data = await response.json();
-        setCategories(
-          data.map(({ id, name, level }: ICategory) => ({ id, name }))
-        );
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    async function fetchSets(): Promise<void> {
-      try {
-        let newSets: ISet[] = [];
-        const response = await fetch(`https://vbujdewvbj.cfolks.pl/api/sets?`, {
-          method: "GET",
-          headers: {
-            Authorization: `Token ${token}`,
-          },
-        });
-        const data = await response.json();
-        // Dodajemy tylko te sety, które mają status 'public'
-        for (const set of data) {
-          if (set.status === "public") {
-            newSets.push({
-              id: set.id,
-              name: set.name,
-              category: set.category,
-            });
-          }
+  async function fetchSets(): Promise<void> {
+    try {
+      let newSets: ISet[] = [];
+      const response = await fetch(`https://vbujdewvbj.cfolks.pl/api/sets?`, {
+        method: "GET",
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      });
+      const data = await response.json();
+      // Dodajemy tylko te sety, które mają status 'public'
+      for (const set of data) {
+        if (set.status === "public") {
+          newSets.push({
+            id: set.id,
+            name: set.name,
+            category: set.category,
+          });
         }
-
-        // Ustawiamy nową tablicę z filtrami
-        setSets(newSets);
-      } catch (error) {
-        console.error(error);
       }
+      // Ustawiamy nową tablicę z filtrami
+      setSets(newSets);
+    } catch (error) {
+      console.error(error);
     }
+  }
 
-    fetchCategories().then(() => fetchSets().then(() => setIsLoading(false)));
-
+  useEffect(() => {
+    fetchCategories(token).then((data) => setCategories(data));
+    fetchSets().then(() => setIsLoading(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
