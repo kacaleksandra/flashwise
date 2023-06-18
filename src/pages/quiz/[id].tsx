@@ -94,6 +94,9 @@ export default function Quiz() {
                           value={answer.letter}
                           control={<Radio />}
                           label={answer.text}
+                          disabled={
+                            finalScore !== "" && finalScore !== undefined
+                          }
                           onChange={() =>
                             handleAnswerChange(question.id, answer.letter)
                           }
