@@ -21,7 +21,6 @@ import { useTokenStore } from "@/store/useTokenStore";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useRouter } from "next/router";
-import { LegendToggleRounded } from "@mui/icons-material";
 
 interface Card {
   front: string;
@@ -157,7 +156,7 @@ export default function NewSet() {
     } finally {
       setIsLoading(false);
       if (setId !== 0) {
-        router.push(`/set/${setId}`);
+        router.push(`/mysets`);
         return;
       }
       router.push(`/mysets`);
@@ -216,9 +215,9 @@ export default function NewSet() {
                     labelPlacement="bottom"
                   />
                 </FormGroup>
-                {!isFormValid() || cards.length < 2 ? (
+                {!isFormValid() || cards.length < 4 ? (
                   <Tooltip
-                    title="Nazwij zestaw i stwórz minimum dwie fiszki!"
+                    title="Nazwij zestaw i stwórz minimum cztery fiszki!"
                     followCursor
                   >
                     <div className="my-5 mr-10 flex flex-col">
@@ -241,7 +240,7 @@ export default function NewSet() {
                         </Select>
                       </FormControl>
                       <Button
-                        disabled={!isFormValid() || cards.length < 2}
+                        disabled={!isFormValid() || cards.length < 4}
                         variant="contained"
                         size="large"
                         className={"bg-blue-500 "}

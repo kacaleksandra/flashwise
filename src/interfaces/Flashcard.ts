@@ -1,6 +1,6 @@
 export default interface IFlashcard {
-  id: number;
+  id?: number;
   front: string;
   back: string;
-  flashcard_set: number;
+  flashcard_set?: number;
 }
