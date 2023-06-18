@@ -5,7 +5,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import ICategory from "@/interfaces/Category";
 import GetToken from "@/functions/GetToken";
 import ISet from "@/interfaces/Set";
-import { fetchCategories } from "@/functions/fetchCategories";
+import { fetchCategories } from "@/functions/FetchCategories";
 
 interface OneCategory {
   category: string;

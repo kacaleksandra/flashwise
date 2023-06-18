@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useTokenStore } from "@/store/useTokenStore";
 import IFlashcard from "@/interfaces/Flashcard";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
@@ -10,7 +9,7 @@ import TableFooter from "@mui/material/TableFooter";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import * as st from "@/pages/set/StyledTable";
+import StyledTable from "@/components/StyledTable";
 import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import { useMySetsStore } from "@/store/useMySetsStore";
@@ -130,7 +129,7 @@ export default function Set() {
               variant="contained"
               className="bg-blue-500 text-white"
               component={Link}
-              href={`/learnSet/${id}`}
+              href={`/learnset/${id}`}
             >
               Przejdź do nauki
             </Button>
@@ -209,7 +208,7 @@ export default function Set() {
                       }}
                       onPageChange={handleChangePage}
                       onRowsPerPageChange={handleChangeRowsPerPage}
-                      ActionsComponent={st.TablePaginationActions}
+                      ActionsComponent={StyledTable}
                     />
                   </TableRow>
                 </TableFooter>
