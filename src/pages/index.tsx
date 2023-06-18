@@ -48,7 +48,11 @@ export default function Home() {
           width={"100%"}
         >
           <Grid item xs={10} sm={7} md={5} lg={4}>
-            <Lottie animationData={flashcard} loop={true} />
+            <Lottie
+              animationData={flashcard}
+              loop={true}
+              className="h-[400px]"
+            />
           </Grid>
           <Grid
             item
