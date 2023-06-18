@@ -59,12 +59,13 @@ export default function MySets() {
       ) : (
         <div className="sm:grid sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           {sets.map(({ id, name, category }, valueIndex) => (
-            <div
+            <Link
+              href={`/set/${id}`}
               key={valueIndex}
               className="p-7 m-6 bg-blue-500 text-white text-center shadow-xl rounded-md flex items-center justify-center"
             >
-              <Link href={`/set/${id}`}>{name}</Link>
-            </div>
+              {name}
+            </Link>
           ))}
         </div>
       )}

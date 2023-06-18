@@ -71,12 +71,13 @@ export default function CategoryTabs({ categories, sets }: CategoryTabsProps) {
               const set = sets.find((set) => set.name === setName);
               if (!set) return null;
               return (
-                <div
+                <Link
+                  href={`/set/${set.id}`}
                   key={`${categoryIndex}-${set.id}`}
                   className="p-7 m-6 bg-blue-500 text-white text-center shadow-xl rounded-md flex items-center justify-center"
                 >
-                  <Link href={`/set/${set.id}`}>{setName}</Link>
-                </div>
+                  {setName}
+                </Link>
               );
             })}
           </div>

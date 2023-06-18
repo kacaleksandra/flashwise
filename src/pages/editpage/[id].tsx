@@ -374,7 +374,7 @@ export default function EditPage() {
                       className={"bg-blue-500 mb-3"}
                       onClick={() => handleEditSetClick()}
                     >
-                      Edytuj zestaw
+                      Zapisz zestaw
                     </Button>
                     <Button
                       variant="contained"
