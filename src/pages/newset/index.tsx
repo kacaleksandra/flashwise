@@ -7,7 +7,7 @@ import {
   FormControl,
   MenuItem,
 } from "@mui/material";
-import Breadcrumb from "../../components/breadcrumb";
+import Breadcrumb from "../../components/Breadcrumb";
 import TextField from "@mui/material/TextField";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";

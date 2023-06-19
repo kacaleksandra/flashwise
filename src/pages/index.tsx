@@ -12,7 +12,7 @@ import {
   responsiveFontSizes,
   ThemeProvider,
 } from "@mui/material/styles";
-import Card from "../components/card/Card";
+import Card from "../components/Card/Card";
 import Button from "@mui/material/Button";
 import Link from "next/link";
 

@@ -1,5 +1,5 @@
-import TopBar from "../../topBar";
-import BottomBar from "@/components/bottomBar/BottomBar";
+import TopBar from "@/components/TopBar";
+import BottomBar from "@/components/BottomBar/BottomBar";
 import Custom404 from "@/pages/";
 import { useRouter } from "next/router";
 import useToken from "@/composables/useToken";

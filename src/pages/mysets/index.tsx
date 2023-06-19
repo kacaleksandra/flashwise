@@ -1,6 +1,6 @@
-import Breadcrumb from "../../components/breadcrumb";
+import Breadcrumb from "../../components/Breadcrumb";
 import Link from "next/link";
-import { AnimationPage } from "@/components/animationPage";
+import { AnimationPage } from "@/components/AnimationPage";
 import nothing from "../../lotties/nothing.json";
 import { useEffect, useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";

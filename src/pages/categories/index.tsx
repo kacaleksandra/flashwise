@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import Breadcrumb from "../../components/breadcrumb";
-import CategoryTabs from "../../components/tabs";
+import Breadcrumb from "../../components/Breadcrumb";
+import CategoryTabs from "../../components/TabsPanel";
 import CircularProgress from "@mui/material/CircularProgress";
 import ICategory from "@/interfaces/Category";
 import useToken from "@/composables/useToken";

@@ -1,5 +1,5 @@
 import success from "../../lotties/success.json";
-import { AnimationPage } from "../../components/animationPage";
+import { AnimationPage } from "../../components/AnimationPage";
 import useToken from "@/composables/useToken";
 
 export default function Succesful() {
