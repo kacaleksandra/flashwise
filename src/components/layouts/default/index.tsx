@@ -1,5 +1,5 @@
 import TopBar from "@/components/TopBar";
-import BottomBar from "@/components/BottomBar/BottomBar";
+import BottomBar from "@/components/BottomBar";
 import Custom404 from "@/pages/";
 import { useRouter } from "next/router";
 import useToken from "@/composables/useToken";
@@ -28,7 +28,7 @@ export function DefaultLayout({ children }: IDefaultLayoutProps) {
         ) : (
           <Custom404 />
         )}
-        <div className="mt-auto ">
+        <div className="mt-auto">
           <BottomBar />
         </div>
       </div>
