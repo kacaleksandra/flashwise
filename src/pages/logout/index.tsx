@@ -8,6 +8,7 @@ export default function Logout() {
   useEffect(() => {
     setToken("");
     localStorage.removeItem("myToken");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

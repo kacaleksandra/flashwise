@@ -42,6 +42,7 @@ export default function MySets() {
     fetchSets().then((sets) => {
       setMySets(sets);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

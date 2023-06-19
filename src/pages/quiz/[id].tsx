@@ -32,6 +32,7 @@ export default function Quiz() {
       .then(() => {
         setIsLoading(false);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

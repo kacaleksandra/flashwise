@@ -271,6 +271,7 @@ export default function EditPage() {
     getSetInfo().then((setName) =>
       getCards(setName).then(() => setIsLoading(false))
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -165,6 +165,7 @@ export default function NewSet() {
 
   useEffect(() => {
     fetchCategories().then((id) => setCategoryID(id));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

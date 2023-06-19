@@ -77,6 +77,7 @@ export default function Set() {
 
   useEffect(() => {
     fetchFlashcards();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // tworzenie tabeli
