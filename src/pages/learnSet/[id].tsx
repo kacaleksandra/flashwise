@@ -5,11 +5,11 @@ import router from "next/router";
 import IFlashcard from "@/interfaces/Flashcard";
 import ISet from "@/interfaces/Set";
 import { CircularProgress } from "@mui/material";
-import getRouteParameter from "@/functions/GetRouteParameter";
-import GetToken from "@/functions/GetToken";
+import getRouteParameter from "@/composables/getRouteParameter";
+import useToken from "@/composables/useToken";
 
 export default function LearnSet() {
-  const token = GetToken();
+  const token = useToken();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [flashcards, setFlashcards] = useState<any>([]);
 

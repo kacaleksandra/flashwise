@@ -22,12 +22,12 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { useRouter } from "next/router";
 import ISet from "@/interfaces/Set";
 import IFlashcard from "@/interfaces/Flashcard";
-import getRouteParameter from "@/functions/GetRouteParameter";
-import GetToken from "@/functions/GetToken";
+import getRouteParameter from "@/composables/getRouteParameter";
+import useToken from "@/composables/useToken";
 
 export default function EditPage() {
   const router = useRouter();
-  const token = GetToken();
+  const token = useToken();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [cards, setCards] = useState<IFlashcard[]>([{ front: "", back: "" }]);
   const [deletedCards, setDeletedCards] = useState<IFlashcard[]>([]);

@@ -20,7 +20,7 @@ import ICategory from "@/interfaces/Category";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useRouter } from "next/router";
-import GetToken from "@/functions/GetToken";
+import useToken from "@/composables/useToken";
 
 interface Card {
   front: string;
@@ -29,7 +29,7 @@ interface Card {
 
 export default function NewSet() {
   const router = useRouter();
-  const token = GetToken();
+  const token = useToken();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [cards, setCards] = useState<Card[]>([{ front: "", back: "" }]);
   // Stan dla pola nazwa zestawu

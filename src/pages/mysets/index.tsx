@@ -6,10 +6,10 @@ import { useEffect, useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import ISet from "@/interfaces/Set";
 import { useMySetsStore } from "@/store/useMySetsStore";
-import GetToken from "@/functions/GetToken";
+import useToken from "@/composables/useToken";
 
 export default function MySets() {
-  const token = GetToken();
+  const token = useToken();
   const [sets, setSets] = useState<ISet[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { setMySets } = useMySetsStore();

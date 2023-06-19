@@ -1,9 +1,9 @@
 import success from "../../lotties/success.json";
 import { AnimationPage } from "../../components/animationPage";
-import GetToken from "@/functions/GetToken";
+import useToken from "@/composables/useToken";
 
 export default function Succesful() {
-  const token = GetToken();
+  const token = useToken();
   return (
     <>
       <AnimationPage

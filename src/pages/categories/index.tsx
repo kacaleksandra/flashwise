@@ -3,9 +3,9 @@ import Breadcrumb from "../../components/breadcrumb";
 import CategoryTabs from "../../components/tabs";
 import CircularProgress from "@mui/material/CircularProgress";
 import ICategory from "@/interfaces/Category";
-import GetToken from "@/functions/GetToken";
+import useToken from "@/composables/useToken";
 import ISet from "@/interfaces/Set";
-import { fetchCategories } from "@/functions/FetchCategories";
+import { fetchCategories } from "@/composables/fetchCategories";
 
 interface OneCategory {
   category: string;
@@ -13,7 +13,7 @@ interface OneCategory {
 }
 
 export default function Categories() {
-  const token = GetToken();
+  const token = useToken();
   const [categories, setCategories] = useState<ICategory[]>([]);
   const [sets, setSets] = useState<ISet[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);

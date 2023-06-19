@@ -14,10 +14,10 @@ import PersonIcon from "@mui/icons-material/Person";
 import { grey } from "@mui/material/colors";
 import Image from "next/image";
 import Link from "next/link";
-import GetToken from "@/functions/GetToken";
+import useToken from "@/composables/useToken";
 
 function TopBar() {
-  const token = GetToken();
+  const token = useToken();
 
   const pages =
     token === ""

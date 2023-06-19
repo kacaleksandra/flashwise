@@ -1,5 +1,5 @@
 import { useTokenStore } from "@/store/useTokenStore";
 
-export default function GetToken() {
+export default function useToken() {
   return useTokenStore((state) => state.token);
 }

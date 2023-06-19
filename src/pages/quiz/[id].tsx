@@ -1,9 +1,9 @@
-import GetToken from "@/functions/GetToken";
-import { getGeneratedQuiz } from "@/functions/GetGeneratedQuiz";
+import useToken from "@/composables/useToken";
+import { getGeneratedQuiz } from "@/composables/getGeneratedQuiz";
 import { useEffect, useState } from "react";
-import getRouteParameter from "@/functions/GetRouteParameter";
+import getRouteParameter from "@/composables/getRouteParameter";
 import { IQuiz, ISendResponse } from "@/interfaces/Quiz";
-import checkQuiz from "@/functions/CheckQuiz";
+import checkQuiz from "@/composables/checkQuiz";
 import {
   Button,
   FormControl,
@@ -18,7 +18,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 export default function Quiz() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const token = GetToken();
+  const token = useToken();
   const [generatedQuiz, setGeneratedQuiz] = useState<IQuiz>();
   const [isAllChecked, setIsAllChecked] = useState<boolean>(false);
   const [answers, setAnswers] = useState<{ [key: number]: string }>({});
