@@ -29,6 +29,7 @@ function TopBar() {
           ["Moje zestawy", "mysets"],
           ["Kategorie", "categories"],
           ["Utwórz nowy zestaw", "newset"],
+          ["Szukaj", "search"],
         ];
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
