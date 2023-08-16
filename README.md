@@ -6,6 +6,19 @@ Flashwise is a dynamic web application designed to help users learn new things e
 
 > This project was created as part of the "Graphic and Object-Oriented programming" course in the 4th semester of computer science studies.
 
+<p align="center">
+  <img width="460" src="https://github.com/kacaleksandra/flashwise/assets/49205215/24079a68-84d3-44d2-ad01-92774151b3f3">
+</p>
+
+<p align="center">
+  <img width="460" src="https://github.com/kacaleksandra/flashwise/assets/49205215/d2aabd82-b249-40ec-918d-f8de6ab9a584">
+</p>
+
+<p align="center">
+  <img width="460" src="https://github.com/kacaleksandra/flashwise/assets/49205215/6d03cae6-bba6-47ce-aa08-864fe53526f7">
+</p>
+
+
 ## Why "flashwise"?
 
 The product name is Flashwise, which was chosen due to the application of the technique of spaced repetition, known as "flashcards," in the learning process. "Wise" pertains to wisdom and intuition, which the app aims to help users acquire through efficient utilization of their own flashcard sets. This name is intended to be easily memorable and to associate with the learning process using flashcards.
