@@ -21,6 +21,7 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useRouter } from "next/router";
 import useToken from "@/composables/useToken";
+import { API_URL } from "@/constants";
 
 interface Card {
   front: string;
@@ -90,7 +91,7 @@ export default function NewSet() {
   const [categories, setCategories] = useState<ICategory[]>([]);
   async function fetchCategories(): Promise<number> {
     try {
-      const response = await fetch("http://vbujdewvbj.cfolks.pl/api/category", {
+      const response = await fetch(`${API_URL}/api/category`, {
         method: "GET",
         headers: {
           Authorization: `Token ${token}`,
@@ -120,7 +121,7 @@ export default function NewSet() {
     try {
       setIsLoading(true);
       // Tworzenie zestawu
-      const setResponse = await fetch("http://vbujdewvbj.cfolks.pl/api/sets/", {
+      const setResponse = await fetch(`${API_URL}/api/sets/`, {
         method: "POST",
         headers: {
           Authorization: `Token ${token}`,
@@ -137,7 +138,7 @@ export default function NewSet() {
       // Dodawanie fiszek
       await Promise.all(
         cards.map(async (card) => {
-          return await fetch("http://vbujdewvbj.cfolks.pl/api/flashcards/", {
+          return await fetch(`${API_URL}/api/flashcards/`, {
             method: "POST",
             headers: {
               Authorization: `Token ${token}`,

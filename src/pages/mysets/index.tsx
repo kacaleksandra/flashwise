@@ -7,6 +7,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import ISet from "@/interfaces/Set";
 import { useMySetsStore } from "@/store/useMySetsStore";
 import useToken from "@/composables/useToken";
+import { API_URL } from "@/constants";
 
 export default function MySets() {
   const token = useToken();
@@ -17,7 +18,7 @@ export default function MySets() {
   async function fetchSets(): Promise<ISet[]> {
     try {
       const response = await fetch(
-        "https://vbujdewvbj.cfolks.pl/api/sets?user_only=True",
+        `${API_URL}/api/sets?user_only=True`,
         {
           headers: { Authorization: `Token ${token}` },
         }

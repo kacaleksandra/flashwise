@@ -6,6 +6,7 @@ import ICategory from "@/interfaces/Category";
 import useToken from "@/composables/useToken";
 import ISet from "@/interfaces/Set";
 import { fetchCategories } from "@/composables/fetchCategories";
+import { API_URL } from "@/constants";
 
 interface OneCategory {
   category: string;
@@ -21,7 +22,7 @@ export default function Categories() {
   async function fetchSets(): Promise<void> {
     try {
       let newSets: ISet[] = [];
-      const response = await fetch(`https://vbujdewvbj.cfolks.pl/api/sets?`, {
+      const response = await fetch(`${API_URL}/api/sets?`, {
         method: "GET",
         headers: {
           Authorization: `Token ${token}`,

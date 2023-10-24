@@ -15,7 +15,7 @@ const validationSchema = Yup.object().shape({
 
 async function LoginUser(username: string, password: string): Promise<string> {
   try {
-    const response = await fetch("http://vbujdewvbj.cfolks.pl/auth/login/", {
+    const response = await fetch(`http://vbujdewvbj.cfolks.pl/auth/login/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password }),
