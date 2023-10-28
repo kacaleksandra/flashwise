@@ -57,7 +57,7 @@ of [the back-end server](https://github.com/bartekpacia/flashwise). Put it in
 `.env.local` file in the root directory:
 
 ```
-NEXT_PUBLIC_API_URL=http://localhost:3000
+NEXT_PUBLIC_API_URL=http://localhost:8080
 ```
 
 ## Authors

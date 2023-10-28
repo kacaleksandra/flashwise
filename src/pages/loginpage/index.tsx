@@ -7,7 +7,7 @@ import ITokenResponse from "@/interfaces/TokenResponse";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { useTokenStore } from "@/store/useTokenStore";
-import { API_URL } from "@constants";
+import { API_URL } from "@/constants";
 
 const validationSchema = Yup.object().shape({
   username: Yup.string().required("To pole jest wymagane"),

@@ -7,7 +7,7 @@ import ISet from "@/interfaces/Set";
 import { CircularProgress } from "@mui/material";
 import getRouteParameter from "@/composables/getRouteParameter";
 import useToken from "@/composables/useToken";
-import { API_URL } from "@constants";
+import { API_URL } from "@/constants";
 
 export default function LearnSet() {
   const token = useToken();

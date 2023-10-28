@@ -19,7 +19,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Link from "next/link";
 import getRouteParameter from "@/composables/getRouteParameter";
 import useToken from "@/composables/useToken";
-import { API_URL } from "@constants";
+import { API_URL } from "@/constants";
 
 export default function Set() {
   const token = useToken();
