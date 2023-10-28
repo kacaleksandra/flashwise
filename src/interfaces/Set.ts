@@ -2,5 +2,5 @@ export default interface ISet {
   id: number;
   name: string;
   category: number;
-  status?: string;
+  is_public: boolean;
 }

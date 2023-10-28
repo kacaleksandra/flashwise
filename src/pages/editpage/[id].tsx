@@ -133,7 +133,7 @@ export default function EditPage() {
       const data = (await response.json()) as ISet[];
       setSetName(data[0].name);
       setCategoryID(data[0].category);
-      setIsPublic(data[0].status === "public" ? true : false);
+      setIsPublic(data[0].is_public);
       return data[0].name;
     } catch (error) {
       console.error(error);
@@ -197,7 +197,7 @@ export default function EditPage() {
           body: JSON.stringify({
             name: setName,
             category: categoryID,
-            status: isPublic ? "public" : "private",
+            is_public: isPublic,
           }),
         }
       );

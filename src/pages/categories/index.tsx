@@ -31,7 +31,7 @@ export default function Categories() {
       const data = await response.json();
       // Dodajemy tylko te sety, które mają status 'public'
       for (const set of data) {
-        if (set.status === "public") {
+        if (set.is_public) {
           newSets.push({
             id: set.id,
             name: set.name,

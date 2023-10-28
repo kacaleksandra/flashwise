@@ -130,7 +130,7 @@ export default function NewSet() {
         body: JSON.stringify({
           name: setName,
           category: categoryID,
-          status: isPublic ? "public" : "private",
+          is_public: isPublic,
         }),
       });
       setId = (await setResponse.json()).id;
