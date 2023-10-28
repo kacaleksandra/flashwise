@@ -1,4 +1,5 @@
 import { IQuiz, IQuestion, IAnswer } from "@/interfaces/Quiz";
+import { API_URL } from "@/constants";
 
 export async function getGeneratedQuiz(
   token: string,
@@ -6,7 +7,7 @@ export async function getGeneratedQuiz(
 ): Promise<IQuiz> {
   try {
     const response = await fetch(
-      "http://vbujdewvbj.cfolks.pl/api/quiz/generate/",
+      `${API_URL}/api/quiz/generate/`,
       {
         method: "POST",
         headers: {

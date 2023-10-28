@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { useTokenStore } from "@/store/useTokenStore";
 import ITokenResponse from "@/interfaces/TokenResponse";
+import { API_URL } from "@/constants";
 
 // schemat walidacji
 const validationSchema = Yup.object().shape({
@@ -33,7 +34,7 @@ async function RegisterUser(
   password2: string
 ): Promise<string> {
   try {
-    const response = await fetch("http://vbujdewvbj.cfolks.pl/api/register", {
+    const response = await fetch(`${API_URL}/api/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, email, password1, password2 }),

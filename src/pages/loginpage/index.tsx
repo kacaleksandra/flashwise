@@ -7,6 +7,7 @@ import ITokenResponse from "@/interfaces/TokenResponse";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { useTokenStore } from "@/store/useTokenStore";
+import { API_URL } from "@constants";
 
 const validationSchema = Yup.object().shape({
   username: Yup.string().required("To pole jest wymagane"),
@@ -15,7 +16,7 @@ const validationSchema = Yup.object().shape({
 
 async function LoginUser(username: string, password: string): Promise<string> {
   try {
-    const response = await fetch(`http://vbujdewvbj.cfolks.pl/auth/login/`, {
+    const response = await fetch(`${API_URL}/auth/login/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password }),

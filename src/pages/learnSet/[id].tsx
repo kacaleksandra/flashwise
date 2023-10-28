@@ -7,6 +7,7 @@ import ISet from "@/interfaces/Set";
 import { CircularProgress } from "@mui/material";
 import getRouteParameter from "@/composables/getRouteParameter";
 import useToken from "@/composables/useToken";
+import { API_URL } from "@constants";
 
 export default function LearnSet() {
   const token = useToken();
@@ -17,7 +18,7 @@ export default function LearnSet() {
     const id = getRouteParameter();
 
     const response = await fetch(
-      `http://vbujdewvbj.cfolks.pl/api/sets?flashcard_set_id=` + id,
+      `${API_URL}/api/sets?flashcard_set_id=` + id,
       {
         method: "GET",
         headers: {
@@ -38,7 +39,7 @@ export default function LearnSet() {
       }
 
       const response = await fetch(
-        `http://vbujdewvbj.cfolks.pl/api/flashcards?flashcard_set=` + set.name,
+        `${API_URL}/api/flashcards?flashcard_set=` + set.name,
 
         {
           method: "GET",
