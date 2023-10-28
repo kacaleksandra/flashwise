@@ -52,6 +52,14 @@ To manage global state in the Flashwise application, the Zustand library was sel
 
 The content of this repository consists of the source files for the front-end part of the Flashwise application. To run the application locally, you need to download or clone this repository, install the dependencies, and start the development server.
 
+You also need to set the environment variable `NEXT_PUBLIC_API_URL` to the URL
+of [the back-end server](https://github.com/bartekpacia/flashwise). Put it in
+`.env.local` file in the root directory:
+
+```
+NEXT_PUBLIC_API_URL=http://localhost:3000
+```
+
 ## Authors
 
 Aleksandra Kacprzak (front-end) and Tomasz Bury (back-end)
