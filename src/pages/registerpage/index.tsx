@@ -45,7 +45,7 @@ async function RegisterUser(
     if (!response.ok) {
       throw new Error("UserExists error");
     }
-    return data.key;
+    return data.token;
   } catch (error) {
     throw new Error("RegisterUser error");
   }
