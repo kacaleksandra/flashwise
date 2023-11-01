@@ -24,6 +24,7 @@ import ISet from "@/interfaces/Set";
 import IFlashcard from "@/interfaces/Flashcard";
 import getRouteParameter from "@/composables/getRouteParameter";
 import useToken from "@/composables/useToken";
+import { API_URL } from "@/constants";
 
 export default function EditPage() {
   const router = useRouter();
@@ -94,7 +95,7 @@ export default function EditPage() {
 
   async function fetchCategories(): Promise<number> {
     try {
-      const response = await fetch("http://vbujdewvbj.cfolks.pl/api/category", {
+      const response = await fetch(`${API_URL}/api/category`, {
         method: "GET",
         headers: {
           Authorization: `Token ${token}`,
@@ -121,7 +122,7 @@ export default function EditPage() {
     try {
       const id = getRouteParameter();
       const response = await fetch(
-        `http://vbujdewvbj.cfolks.pl/api/sets?flashcard_set_id=${id}`,
+        `${API_URL}/api/sets?flashcard_set_id=${id}`,
         {
           method: "GET",
           headers: {
@@ -132,7 +133,7 @@ export default function EditPage() {
       const data = (await response.json()) as ISet[];
       setSetName(data[0].name);
       setCategoryID(data[0].category);
-      setIsPublic(data[0].status === "public" ? true : false);
+      setIsPublic(data[0].is_public);
       return data[0].name;
     } catch (error) {
       console.error(error);
@@ -143,7 +144,7 @@ export default function EditPage() {
   async function getCards(name: string): Promise<IFlashcard[]> {
     try {
       const response = await fetch(
-        `http://vbujdewvbj.cfolks.pl/api/flashcards?flashcard_set=${name}`,
+        `${API_URL}/api/flashcards?flashcard_set=${name}`,
         {
           method: "GET",
           headers: {
@@ -164,7 +165,7 @@ export default function EditPage() {
     try {
       const id = getRouteParameter();
       const response = await fetch(
-        `http://vbujdewvbj.cfolks.pl/api/sets/${id}/`,
+        `${API_URL}/api/sets/${id}/`,
         {
           method: "DELETE",
           headers: {
@@ -186,7 +187,7 @@ export default function EditPage() {
       setIsLoading(true);
       // Aktualizowanie nazwy zestawu
       const setResponse = await fetch(
-        `http://vbujdewvbj.cfolks.pl/api/sets/${setId}/`,
+        `${API_URL}/api/sets/${setId}/`,
         {
           method: "PUT",
           headers: {
@@ -196,7 +197,7 @@ export default function EditPage() {
           body: JSON.stringify({
             name: setName,
             category: categoryID,
-            status: isPublic ? "public" : "private",
+            is_public: isPublic,
           }),
         }
       );
@@ -205,7 +206,7 @@ export default function EditPage() {
       await Promise.all(
         cards.map(async (card) => {
           if (card.id === undefined) {
-            return await fetch("http://vbujdewvbj.cfolks.pl/api/flashcards/", {
+            return await fetch(`${API_URL}/api/flashcards/`, {
               method: "POST",
               headers: {
                 Authorization: `Token ${token}`,
@@ -219,7 +220,7 @@ export default function EditPage() {
             });
           } else {
             return await fetch(
-              `http://vbujdewvbj.cfolks.pl/api/flashcards/${card.id}/`,
+              `${API_URL}/api/flashcards/${card.id}/`,
               {
                 method: "PUT",
                 headers: {
@@ -239,7 +240,7 @@ export default function EditPage() {
       await Promise.all(
         deletedCards.map(async (card) => {
           return await fetch(
-            `http://vbujdewvbj.cfolks.pl/api/flashcards/${card.id}/`,
+            `${API_URL}/api/flashcards/${card.id}/`,
             {
               method: "DELETE",
               headers: {

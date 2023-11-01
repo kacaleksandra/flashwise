@@ -1,4 +1,5 @@
 import ISet from "@/interfaces/Set";
+import { API_URL } from "@/constants";
 
 export default async function fetchSearch(
   token: string,
@@ -6,7 +7,7 @@ export default async function fetchSearch(
 ): Promise<ISet[]> {
   try {
     const response = await fetch(
-      `http://vbujdewvbj.cfolks.pl/api/sets?name=${searchText}`,
+      `${API_URL}/api/sets?name=${searchText}`,
       {
         method: "GET",
         headers: {

@@ -1,4 +1,5 @@
 import { ISendResponse } from "@/interfaces/Quiz";
+import { API_URL } from "@/constants";
 
 export default async function checkQuiz(
   token: string,
@@ -7,7 +8,7 @@ export default async function checkQuiz(
   try {
     console.log(result);
     const response = await fetch(
-      "http://vbujdewvbj.cfolks.pl/api/quiz/check/",
+      `${API_URL}/api/quiz/check/`,
       {
         method: "PUT",
         headers: {
