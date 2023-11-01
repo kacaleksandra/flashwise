@@ -18,7 +18,7 @@ export default function MySets() {
   async function fetchSets(): Promise<ISet[]> {
     try {
       const response = await fetch(
-        `${API_URL}/api/sets?user_only=True`,
+        `${API_URL}/api/sets?include_private=true`,
         {
           headers: { Authorization: `Token ${token}` },
         }
