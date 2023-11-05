@@ -41,14 +41,15 @@ export default function Set() {
         },
       }
     );
-    const set = (await response.json()) ?? [];
-    return set[0];
+    const set = (await response.json()) as ISet;
+    return set;
   }
 
   async function fetchFlashcards(): Promise<void> {
     try {
       const set = await getSet();
-      if (set === undefined) {
+      if (set == null) {
+        console.error('error: set is null or undefined')
         await router.push("/categories");
         return;
       }
