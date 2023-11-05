@@ -9,7 +9,7 @@ export async function fetchCategories(token: string): Promise<ICategory[]> {
         Authorization: `Token ${token}`,
       },
     });
-    const data = await response.json();
+    const data = await response.json() as ICategory[];
     return data;
   } catch (error) {
     console.error(error);

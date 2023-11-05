@@ -56,7 +56,7 @@ export default function Set() {
       setSetName(set.name);
 
       const response = await fetch(
-        `${API_URL}/api/flashcards?flashcard_set=` + set.name,
+        `${API_URL}/api/flashcards?flashcard_set=` + set.id,
 
         {
           method: "GET",

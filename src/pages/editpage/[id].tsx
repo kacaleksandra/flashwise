@@ -130,21 +130,21 @@ export default function EditPage() {
           },
         }
       );
-      const data = (await response.json()) as ISet[];
-      setSetName(data[0].name);
-      setCategoryID(data[0].category);
-      setIsPublic(data[0].is_public);
-      return data[0].name;
+      const data = (await response.json()) as ISet;
+      setSetName(data.name);
+      setCategoryID(data.category);
+      setIsPublic(data.is_public);
+      return data.id;
     } catch (error) {
       console.error(error);
     }
     return "";
   }
 
-  async function getCards(name: string): Promise<IFlashcard[]> {
+  async function getCards(setID: string): Promise<IFlashcard[]> {
     try {
       const response = await fetch(
-        `${API_URL}/api/flashcards?flashcard_set=${name}`,
+        `${API_URL}/api/flashcards?flashcard_set=${setID}`,
         {
           method: "GET",
           headers: {
@@ -269,8 +269,8 @@ export default function EditPage() {
 
   useEffect(() => {
     fetchCategories();
-    getSetInfo().then((setName) =>
-      getCards(setName).then(() => setIsLoading(false))
+    getSetInfo().then((setID) =>
+      getCards(setID).then(() => setIsLoading(false))
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
