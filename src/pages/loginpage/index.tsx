@@ -27,7 +27,7 @@ async function LoginUser(username: string, password: string): Promise<string> {
     if (!response.ok) {
       throw new Error("Incorrect login or password");
     }
-    return data.key;
+    return data.token;
   } catch (error) {
     throw new Error("LoginUser error");
   }
