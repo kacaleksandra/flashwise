@@ -15,7 +15,7 @@ export async function getGeneratedQuiz(
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          flashcards_set: id,
+          flashcard_set_id: id,
         }),
       }
     );

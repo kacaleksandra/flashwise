@@ -52,7 +52,7 @@ export default function Quiz() {
 
   async function handleSubmit(): Promise<void> {
     const result: ISendResponse = {
-      flashcards_set: parseInt(getRouteParameter()),
+      flashcard_set_id: parseInt(getRouteParameter()),
       quiz_id: generatedQuiz?.quiz_id,
       answers: answers,
     };

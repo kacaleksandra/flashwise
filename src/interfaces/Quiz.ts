@@ -15,7 +15,7 @@ export interface IQuiz {
 }
 
 export interface ISendResponse {
-  flashcards_set: number;
+  flashcard_set_id: number;
   quiz_id?: number;
   answers?: any;
 }
