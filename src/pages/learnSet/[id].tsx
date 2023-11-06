@@ -26,20 +26,21 @@ export default function LearnSet() {
         },
       }
     );
-    const set = (await response.json()) ?? [];
-    return set[0];
+    const set = (await response.json());
+    return set;
   }
 
   async function fetchFlashcards(): Promise<void> {
     try {
       const set = await getSet();
       if (set === undefined) {
+        console.error('error: set is null or undefined')
         await router.push("/categories");
         return;
       }
 
       const response = await fetch(
-        `${API_URL}/api/flashcards?flashcard_set=` + set.name,
+        `${API_URL}/api/flashcards?flashcard_set=` + set.id,
 
         {
           method: "GET",
