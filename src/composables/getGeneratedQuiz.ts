@@ -15,22 +15,12 @@ export async function getGeneratedQuiz(
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          flashcard_set_id: id,
+          flashcard_set_id: parseInt(id),
         }),
       }
     );
-    const data = await response.json();
-    const quiz_id = data[0].quiz_id;
-    data.splice(0, 1);
-    const questions = data.map((item: IQuestion) => ({
-      id: item.id,
-      text: item.text,
-      answers: item.answers.map((answer: IAnswer) => ({
-        letter: answer.letter,
-        text: answer.text,
-      })),
-    }));
-    return { quiz_id, questions };
+    const data = await response.json() as IQuiz;
+    return data;
   } catch (error) {
     console.error(error);
     return {};

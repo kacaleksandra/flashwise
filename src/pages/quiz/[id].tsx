@@ -82,7 +82,7 @@ export default function Quiz() {
             }}
           >
             <FormControl>
-              {generatedQuiz?.questions &&
+              {generatedQuiz.questions &&
                 generatedQuiz.questions.map((question) => (
                   <div key={question.id} className="my-3">
                     <FormLabel className="font-medium">
