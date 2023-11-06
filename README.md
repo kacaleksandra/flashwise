@@ -62,5 +62,5 @@ NEXT_PUBLIC_API_URL=http://localhost:8080
 
 ## Authors
 
-Aleksandra Kacprzak (front-end) and Tomasz Bury (back-end)
-June 2023
+Aleksandra Kacprzak (front-end) and Bartek Pacia (back-end)
+December 2023
