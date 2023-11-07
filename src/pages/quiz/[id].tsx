@@ -52,7 +52,7 @@ export default function Quiz() {
 
   async function handleSubmit(): Promise<void> {
     const result: ISendResponse = {
-      flashcards_set: parseInt(getRouteParameter()),
+      flashcard_set_id: parseInt(getRouteParameter()),
       quiz_id: generatedQuiz?.quiz_id,
       answers: answers,
     };
@@ -82,7 +82,7 @@ export default function Quiz() {
             }}
           >
             <FormControl>
-              {generatedQuiz?.questions &&
+              {generatedQuiz.questions &&
                 generatedQuiz.questions.map((question) => (
                   <div key={question.id} className="my-3">
                     <FormLabel className="font-medium">
