@@ -37,8 +37,9 @@ export default function Quiz() {
 
   useEffect(() => {
     if (generatedQuiz) {
+      console.log(generatedQuiz);
       setIsAllChecked(
-        Object.keys(answers).length === generatedQuiz?.questions?.length
+        Object.keys(answers).length === generatedQuiz?.question?.length
       );
     }
   }, [answers, generatedQuiz]);
@@ -46,7 +47,7 @@ export default function Quiz() {
   //obsługa quizu
   const handleAnswerChange = (questionId: number, answerLetter: string) => {
     setAnswers(Object.assign({}, answers, { [questionId]: answerLetter }));
-    if (Object.keys(answers).length === generatedQuiz?.questions?.length)
+    if (Object.keys(answers).length === generatedQuiz?.question?.length)
       setIsAllChecked(true);
   };
 
@@ -82,8 +83,8 @@ export default function Quiz() {
             }}
           >
             <FormControl>
-              {generatedQuiz.questions &&
-                generatedQuiz.questions.map((question) => (
+              {generatedQuiz?.question &&
+                generatedQuiz.question.map((question) => (
                   <div key={question.id} className="my-3">
                     <FormLabel className="font-medium">
                       {question.text}
@@ -121,7 +122,7 @@ export default function Quiz() {
             <Typography className="text-blue-500 text-lg font-bold">
               {finalScore === undefined
                 ? "Wystąpił błąd w czasie sprawdzania quizu"
-                : `${finalScore}/${generatedQuiz?.questions?.length}`}
+                : `${finalScore}/${generatedQuiz?.question?.length}`}
             </Typography>
           )}
         </div>

@@ -11,7 +11,7 @@ export interface IQuestion {
 
 export interface IQuiz {
   quiz_id?: number;
-  questions?: IQuestion[];
+  question?: IQuestion[];
 }
 
 export interface ISendResponse {
