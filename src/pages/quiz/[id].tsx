@@ -37,24 +37,21 @@ export default function Quiz() {
 
   useEffect(() => {
     if (generatedQuiz) {
-      console.log(generatedQuiz);
       setIsAllChecked(
         Object.keys(answers).length === generatedQuiz?.question?.length
       );
     }
   }, [answers, generatedQuiz]);
 
-  //obsługa quizu
-  const handleAnswerChange = (questionId: number, answerLetter: string) => {
-    setAnswers(Object.assign({}, answers, { [questionId]: answerLetter }));
+  //obsługa zmiany odpowiedzi
+  const handleAnswerChange = (questionId: number, text: string) => {
+    setAnswers(Object.assign({}, answers, { [questionId]: text }));
     if (Object.keys(answers).length === generatedQuiz?.question?.length)
       setIsAllChecked(true);
   };
 
   async function handleSubmit(): Promise<void> {
     const result: ISendResponse = {
-      flashcard_set_id: parseInt(getRouteParameter()),
-      quiz_id: generatedQuiz?.quiz_id,
       answers: answers,
     };
     const res = await checkQuiz(token, result);
@@ -85,7 +82,7 @@ export default function Quiz() {
             <FormControl>
               {generatedQuiz?.question &&
                 generatedQuiz.question.map((question) => (
-                  <div key={question.id} className="my-3">
+                  <div key={question.flashcard_id} className="my-3">
                     <FormLabel className="font-medium">
                       {question.text}
                     </FormLabel>
@@ -100,7 +97,10 @@ export default function Quiz() {
                             finalScore !== "" && finalScore !== undefined
                           }
                           onChange={() =>
-                            handleAnswerChange(question.id, answer.letter)
+                            handleAnswerChange(
+                              question.flashcard_id,
+                              answer.text
+                            )
                           }
                         />
                       ))}

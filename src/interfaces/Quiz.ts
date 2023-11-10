@@ -4,18 +4,19 @@ export interface IAnswer {
 }
 
 export interface IQuestion {
-  id: number;
+  flashcard_id: number;
   text: string;
   answers: IAnswer[];
 }
 
 export interface IQuiz {
-  quiz_id?: number;
-  question?: IQuestion[];
+  question: IQuestion[];
 }
 
 export interface ISendResponse {
-  flashcard_set_id: number;
-  quiz_id?: number;
-  answers?: any;
+  answers: AnswersResponse;
+}
+
+interface AnswersResponse {
+  [questionId: string]: string;
 }
