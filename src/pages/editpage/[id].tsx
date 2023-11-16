@@ -134,7 +134,7 @@ export default function EditPage() {
       setSetName(data.name);
       setCategoryID(data.category);
       setIsPublic(data.is_public);
-      return data.id;
+      return data.id.toString();
     } catch (error) {
       console.error(error);
     }
@@ -164,15 +164,12 @@ export default function EditPage() {
   async function handleDeleteSetClick(): Promise<void> {
     try {
       const id = getRouteParameter();
-      const response = await fetch(
-        `${API_URL}/api/sets/${id}/`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Token ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${API_URL}/api/sets/${id}/`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      });
     } catch (error) {
       console.error(error);
     } finally {
@@ -186,21 +183,18 @@ export default function EditPage() {
     try {
       setIsLoading(true);
       // Aktualizowanie nazwy zestawu
-      const setResponse = await fetch(
-        `${API_URL}/api/sets/${setId}/`,
-        {
-          method: "PUT",
-          headers: {
-            Authorization: `Token ${token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: setName,
-            category: categoryID,
-            is_public: isPublic,
-          }),
-        }
-      );
+      const setResponse = await fetch(`${API_URL}/api/sets/${setId}/`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Token ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: setName,
+          category: categoryID,
+          is_public: isPublic,
+        }),
+      });
 
       // Edycja fiszek
       await Promise.all(
@@ -219,30 +213,8 @@ export default function EditPage() {
               }),
             });
           } else {
-            return await fetch(
-              `${API_URL}/api/flashcards/${card.id}/`,
-              {
-                method: "PUT",
-                headers: {
-                  Authorization: `Token ${token}`,
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  flashcard_set: setId,
-                  front: card.front,
-                  back: card.back,
-                }),
-              }
-            );
-          }
-        })
-      );
-      await Promise.all(
-        deletedCards.map(async (card) => {
-          return await fetch(
-            `${API_URL}/api/flashcards/${card.id}/`,
-            {
-              method: "DELETE",
+            return await fetch(`${API_URL}/api/flashcards/${card.id}/`, {
+              method: "PUT",
               headers: {
                 Authorization: `Token ${token}`,
                 "Content-Type": "application/json",
@@ -252,8 +224,24 @@ export default function EditPage() {
                 front: card.front,
                 back: card.back,
               }),
-            }
-          );
+            });
+          }
+        })
+      );
+      await Promise.all(
+        deletedCards.map(async (card) => {
+          return await fetch(`${API_URL}/api/flashcards/${card.id}/`, {
+            method: "DELETE",
+            headers: {
+              Authorization: `Token ${token}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              flashcard_set: setId,
+              front: card.front,
+              back: card.back,
+            }),
+          });
         })
       );
     } catch (error) {
@@ -268,6 +256,7 @@ export default function EditPage() {
   }
 
   useEffect(() => {
+    console.log(token);
     fetchCategories();
     getSetInfo().then((setID) =>
       getCards(setID).then(() => setIsLoading(false))
